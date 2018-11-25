@@ -10,6 +10,8 @@ function validarUsuario($correo, $contrasena){
         $_SESSION['id_usuario'] = $datos['id_usuario'];
         $_SESSION['nombre'] = $datos['nombre'];
         $_SESSION['correo'] = $datos['correo'];
+        $_SESSION['tipo_usuario'] = $datos['tipo_usuario'];
+        $_SESSION['permisos_especiales'] = $datos['permisos_especiales'];
         return true;
     }else{
         $errores['no_login'] = "Comprueba tu correo y contraseña";

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("libs/funciones_comprobacion.php");
+//include("libs/funciones_comprobacion.php");
 ?>
 
 <!DOCTYPE html>

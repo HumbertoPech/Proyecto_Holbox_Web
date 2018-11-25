@@ -78,10 +78,10 @@ session_start();
                 <?php
                 if(empty($_SESSION)){
                     echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
-                    echo "<label><a href='sistemas/sistema_signup/signup.php'> Registrarse</a></label>";
+                    echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
-                    echo "<label><a href='sistemas/sistema_login/logout.php'>Cerrar Sesión </a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
                 ?>
             </div>
