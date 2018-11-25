@@ -21,5 +21,4 @@ function isError($errores, $campo){
     return $return;
 }
 
-
 ?>

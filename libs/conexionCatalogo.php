@@ -1,12 +1,10 @@
 <?php
                     /*Carga las imagenes de LOS USUARIOS*/
-function consultar($sentencia){
+function consultar($query){
 
                     include('core/Conexion.php');  
                      $conector = new Conexion();
-                     $conexion= $conector ->get_conexion();
-
-                    $query = "SELECT * FROM restaurantes"." " . $sentencia;                    
+                     $conexion= $conector ->get_conexion();                               
 
                     if($conexion){
                         $arrayRestaurantes = array();
@@ -26,4 +24,12 @@ function consultar($sentencia){
 
 return $arrayRestaurantes;
 }
+
+function eliminar($query){
+
+}
+function actualizar($query){
+
+}
+
 ?> 
