@@ -1,13 +1,15 @@
 <?php
 session_start();
-$_SESSION["tipo"]= 'proveedor';
-$_SESSION["permisos_especiales"]= array(0,1,14);
+//$_SESSION["tipo"]= 'usuario';
+//$_SESSION["permisos_especiales"]= array(0,1,14);
 
-$roles= array("usuario");
-$redireccion = "catalogo/editar";
+$roles= array("proveedor");
+$permisos = array(9,10,11);
+$redireccion = "catalogo/iniciarCatalogo";
 
-accion_validarPermisos($nombreModulo,$permisos,$redireccion);
+validarPermisos($roles,$permisos,$redireccion);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,43 +73,9 @@ accion_validarPermisos($nombreModulo,$permisos,$redireccion);
 
 <!--.contenido-->
 <div id="contenido">
-    
-
-    <!--Seccion CATALOGO -->
-    <div class="nav-bar">
-        <div class="restaurante-filtro">
-            <span> Selecciona tu restaurante</span>
-           
-        </div>
-
-        <form id="filtros-restaurantes">
-
-            <div class="restaurante-filtro" name="filtro-tipo">
-                <div class="titulo-filtro"> Tipo de restaurante</div>
-                <input type="checkbox" name="tipoRest[]" value="Bares" /> Bares y discos<br />
-                <input type="checkbox" name="tipoRest[]" value="Restaurantes" /> Restaurantes<br />
-                <input type="checkbox" name="tipoRest[]" value="Postres" /> Postres<br />
-
-            </div>
-
-            <div class="restaurante-filtro" name="filtro-precio">
-                <div class="titulo-filtro"> Precio</div>
-                <input type="checkbox" name="precioRest[]" value="Costoso" /> $$$<br />
-                <input type="checkbox" name="precioRest[]" value="Medio" /> $$<br />
-                <input type="checkbox" name="precioRest[]" value="Economico" /> $<br />
-            </div>
-
-           <input type="button" id="buscar" name="buscar" value="Buscar" onclick="buscarRestaurantes()" />
-        </form>
-
-    </div>
-
-
-    <article class="seccion " id="catalogo">
-         <div class="flex-container flex-catalogo" id="catalog-grid">
-            <?php echo $catalogoPrincipal;?>
-         </div>
-    </article>
+    <div>
+        <p>Esta página es para editar el catalogo,jeje</p>
+    </div>    
 
 </div>
 

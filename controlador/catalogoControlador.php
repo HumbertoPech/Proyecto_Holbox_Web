@@ -27,15 +27,13 @@
 */
 
 function accion_iniciarCatalogo() {
-
 	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion;
 
 	/** @ignore */
 	// Incluye el modelo que corresponde
-	include('modelo/catalogoModelo.php');
-	
-    $titulo = generarTitulo(); 
 
+	include_once('modelo/catalogoModelo.php');	
+    $titulo = generarTitulo();
     $catalogoPrincipal= cargarPrincipal();
     
 	/** @ignore */
@@ -43,6 +41,34 @@ function accion_iniciarCatalogo() {
 	
     include('vista/catalogoVista.php');    
 	
+}
+
+function accion_validarPermisos($roles,$permisos,$redireccion){
+	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion,$directorio_base;
+	// Incluye el modelo que corresponde
+	
+	if (count(array_intersect($_SESSION["permisos_especiales"], $permisos)) === 0) {
+	     $permisoEspecial=false; //no permisos especiales.
+	  } else {
+	    $permisoEspecial=true;
+  	}
+
+ 	 $usuarioValido=  (in_array($_SESSION["tipo"],$roles) || $permisoEspecial);
+	
+	if($usuarioValido){
+		echo "puedes pasar a esta pagina";
+	}else{		
+		header("location:" . $url_base . $redireccion); 
+	}
+	/*echo $_SESSION['tipo'];
+    var_dump($_SESSION['permisos_especiales']);
+    echo $redireccion;
+	*/
+}
+function accion_editar(){
+	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion,$directorio_base;
+	// Incluye el modelo que corresponde
+	include ('vista/editorCatalogoVista.php');
 }
 /**
 * Regresa el resultado de la llamada AJAX de busqueda.
@@ -58,7 +84,6 @@ function accion_iniciarCatalogo() {
 * * @uses generarTitulo
 */
 function accion_buscarRestaurante() {
-
 	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion;
 
 	/** @ignore */
