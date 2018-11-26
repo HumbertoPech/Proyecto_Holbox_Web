@@ -75,6 +75,25 @@ function accion_buscarRestaurante() {
 	$resultado= realizarBusqueda();
 	echo $resultado;
 }
+function accion_agregarRestaurante(){
+
+	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion;
+
+	/** @ignore */
+	// Incluye el modelo que corresponde
+	include('modelo/catalogoModelo.php');
+	$resultado= insertarRestaurante();
+	echo "<script>alert($resultado);</script>";
+	$redireccion= $url_base."catalogo/editar";
+	echo "<script>setTimeout(\"location.href = '$redireccion';\",1500);</script>";
+}
+function accion_eliminarRestaurante(){
+
+}
+
+function accion_editarRestaurante(){
+	
+}
 
 
 ?>
