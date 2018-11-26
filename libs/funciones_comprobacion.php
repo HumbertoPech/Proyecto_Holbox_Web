@@ -20,11 +20,12 @@ function isError($errores, $campo){
     }
     return $return;
 }
+
 //regresa los permisos en array
 function validarPermisos($nombreModulo){
     global $aplicacion, $url_base;    
    
-    if(!empty($nombreModulo)){
+    if( !empty($nombreModulo)){
     // Incluye y crea la conexion para buscar en la bd:
         require_once('libs/consulta_permisos.php');  
         
@@ -32,7 +33,7 @@ function validarPermisos($nombreModulo){
         $query = "SELECT p.id_permiso FROM permisos p JOIN modulos m ON p.id_modulo=m.id_modulo 
                   WHERE m.nombre_modulo =" ."'". $nombreModulo ."'";
         
-        $permisosModulo= consultarPermisos($query);         
+        $permisosModulo= consultarPermisos($query);             
         //buscando permisos del rol:
         $query= "SELECT rp.id_permiso FROM roles_permisos rp JOIN roles r ON rp.id_rol=r.id_rol 
                   WHERE r.nombre_rol =" ."'". $_SESSION["tipo_usuario"] ."'";
@@ -42,7 +43,7 @@ function validarPermisos($nombreModulo){
                             array_keys($_SESSION['permisos_especiales'])));     
         //El usuario tiene almenos un permisos del modulo.
         $permisosUsuario=array_intersect($permisosModulo, $permisosRecibidos);
-
+        
         $consulta= array();
         foreach ($permisosUsuario as $idpermiso) {
             array_push($consulta, 'id_permiso= '.$idpermiso);
@@ -51,7 +52,9 @@ function validarPermisos($nombreModulo){
 
         $query= "SELECT * FROM permisos  WHERE " . $consulta;
         return consultar($query);
-    }       
+    }
+    return array();
+          
 }
 
 ?>

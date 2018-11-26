@@ -1,7 +1,6 @@
 <?php
-                    /*Carga las imagenes de LOS USUARIOS*/
 include('core/Conexion.php'); 
-function consultar($query){
+function consultarRestaurantes($query){
                      $conector = new Conexion();
                      $conexion= $conector ->get_conexion();                               
 
@@ -12,12 +11,28 @@ function consultar($query){
                             while($row = $resultado->fetch_assoc()){                     
                                 $arrayRestaurantes[]=$row;
                             }
+                            $conexion->close();
                             return $arrayRestaurantes;
                         }
                     }
                     return $arrayRestaurantes;
 }
 
+function añadir($query){
+    $conector = new Conexion();
+                     $conexion= $conector ->get_conexion();                           
+
+                    if($conexion){
+                        $resultado = $conexion->query($query);
+                        if ($resultado === TRUE) {
+                            $conexion->close();
+                             return "Restaurante agregado";
+                        }
+                    }
+                    $conexion->close();
+    return $resultado->error();
+
+}
 function eliminar($query){
 
 }

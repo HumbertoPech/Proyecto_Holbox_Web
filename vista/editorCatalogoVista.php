@@ -1,14 +1,15 @@
 <?php
 session_start();
-$_SESSION["tipo_usuario"]= 'proveedor';
-$_SESSION["permisos_especiales"]= array(12 => "editar restaurante" ,
-    18 => "eliminar restaurante");
+$_SESSION["tipo_usuario"]= 'usuario';
+$_SESSION["id_usuario"]= "1";
+$_SESSION["permisos_especiales"]= array(10 => "editar restaurante" ,
+    11 => "eliminar restaurante");
 
 $nombre = "catalogo de restaurantes";
 $redireccion = "catalogo/iniciarCatalogo";
- 
-if (empty(validarPermisos($nombre);)){   
-    header("location:" . $url_base . $redireccion);        
+ $a= validarPermisos($nombre);
+if (empty($a)){   
+    header("location:" . $url_base . $redireccion);
 }else{
     echo "puedes pasar";
 }
@@ -28,7 +29,6 @@ if (empty(validarPermisos($nombre);)){
 </head>
 
 <body>
-
 <header class="header-general">
             <div style="padding: 8px 16px; overflow: hidden;">
                 <div class="tamano-5" id="logo"><span>HOLBOX</span></div>
@@ -77,7 +77,6 @@ if (empty(validarPermisos($nombre);)){
 
 <!--.contenido-->
 <div id="contenido">
-
     <!--Seccion Navegacion -->
     <div class="nav-bar">
         <div class="restaurante-filtro">
@@ -87,11 +86,10 @@ if (empty(validarPermisos($nombre);)){
             <button class="tablinks" onclick="abrirConfig(event, 'agregar')" 
                     id="defaultOpen">Agregar restaurante</button>
 
-            <button class="tablinks" onclick="abrirConfig(event, 'eliminar')" 
-                    id="defaultOpen">Eliminar restaurante</button>
+            <button class="tablinks" onclick="abrirConfig(event, 'eliminar')">
+                    Eliminar restaurante</button>
 
-           <button class="tablinks" onclick="abrirConfig(event, 'editar')" 
-                    id="defaultOpen">Editar restaurante</button>
+           <button class="tablinks" onclick="abrirConfig(event, 'editar')">Editar restaurante</button>
          </div>        
     </div>
     
@@ -99,19 +97,102 @@ if (empty(validarPermisos($nombre);)){
         <div>
             <span> Bienvenido al editor de restaurantes</span>           
         </div>
-         <div class="flex-container flex-catalogo" id="content-area">
-         </div>
-         <div id="agregar" class="tabcontent">
+
+        <div id="agregar" class="tabcontent" >
            <h3>Agrega un restaurante</h3>
-           <p>London is the capital city of England.</p>
-    </div>
+           <div class="container">
+
+            <form  id="agregarForm" name="agregarForm" method="post" action="<?php echo  $url_base?>catalogo/agregarRestaurante" enctype= "multipart/form-data">
+
+                <div class="row"> 
+                <input type="text" id="nombrerest" name="id_usuario" 
+                        value= "<?php echo $_SESSION['id_usuario']?>" style="display: none;"> 
+
+                  <div class="col-25">
+                    <label for="nombre">Nombre Restaurante</label>
+                  </div>
+                  <div class="col-75">
+                    <input type="text" id="nombrerest" name="nombre_restaurante" placeholder="Nombre de tu restaurante.." required>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label for="tel">Telefono</label>
+                  </div>
+                  <div class="col-75">
+                    <input type="text" id="telefonorest" name="telefono_restaurante" placeholder="Telefono.." required>
+                  </div>
+                </div>
+
+                 <div class="row">
+                  <div class="col-25">
+                    <label for="hora">Horarios</label>
+                  </div>
+                  <div class="col-75">
+                    De <input type="time" id="horarioAbierto" name= "horario_abierto">
+                    a <input type="time" id="horarioCerrado" name="horario_cerrado">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label for="precio">Precio</label>
+                  </div>
+                  <div class="col-75">
+                    <select id="preciorest" name="precio" required>
+                      <option value="Costoso">Costoso</option>
+                      <option value="Medio">Medio</option>
+                      <option value="Economico">Economico</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label for="tipo">Tipo </label>
+                  </div>
+                  <div class="col-75">
+                    <select id="tiporest" name="tipo_restaurante" required>
+                      <option value="Restaurantes">Restaurantes</option>
+                      <option value="Bares">Bares</option>
+                      <option value="Postres">Postres</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label for="descripcion">Descripcion</label>
+                  </div>
+                  <div class="col-75">
+                    <textarea id="descripcionrest" name="descripcion_restaurante" placeholder="Describa el lugar.." style="height:200px"></textarea>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label for="imagen">Sube una foto</label>
+                  </div>
+                  <div class="col-75">                   
+                    <input type="file" id= "imgrest" name="imagen_restaurante" required>
+                  </div>
+                  <div id="image-preview"></div>
+                </div>
+                <div class="row">
+                  <input type="submit" value="agregarRest" onsubmit=" return validateForm()">
+                </div>
+              </form>
+           </div>
+        </div>
+ 
     <div id="eliminar" class="tabcontent">
                 <h3>Elimina un restaurante</h3>
                 <p>London is the capital city of England.</p>
     </div>
 
     <div id="editar" class="tabcontent">
-                <h3>Edita un restaurante</h3>
+        <h3>Edita un restaurante</h3>
     </div>
 
 
@@ -150,7 +231,9 @@ if (empty(validarPermisos($nombre);)){
 </footer>
 
 <script type="text/javascript">
-     
+     // Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
    function abrirConfig(evt, nombreConfig) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -164,6 +247,20 @@ if (empty(validarPermisos($nombre);)){
     document.getElementById(nombreConfig).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+function validateForm() {
+    var fileInput = document.getElementById('imgrest');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        alert('Solo sube fotos con extension .jpeg/.jpg/.png ');
+        fileInput.value = '';
+        return false;
+    }
+    return true;  
+}
+
+
 
 </script>
 
