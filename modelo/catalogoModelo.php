@@ -128,16 +128,20 @@ function presentarResultados($rest){
 XYZ;
 return $columnas;
 }
+//Regresa HTML del menu
+function obtenerMenuEdicion(){
 
-function validarUsuario($roles,$permisos){
-  $permisoEspecial = false;
+    $HTMLrespuesta= array();
 
-  if (count(array_intersect($_SESSION["permisos_especiales"], $permisos)) === 0) {
-     $permisoEspecial=false; //no permisos especiales.
-  } else {
-    $permisoEspecial=true;
-  }
-  return (in_array($_SESSION["tipo"],$roles) || $permisoEspecial);
+  
+    if($_SESSION['tipo_usuario'] == "Proveedor"){
+      array_push($HTMLrespuesta, "</ul>");
+          $HTMLrespuesta= "";  
+    }else{
+      $permisosEspeciales=$_SESSION['permisos_especiales'];
+    }
+    array_push($HTMLrespuesta, "</ul>");
+    return implode(" ", $HTMLrespuesta);
 }
 
 ?>

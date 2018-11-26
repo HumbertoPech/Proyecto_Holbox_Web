@@ -4,10 +4,14 @@ session_start();
 //$_SESSION["permisos_especiales"]= array(90,1,14);
 
 
-$nombreModulo = "";
+$nombre = "";
 $redireccion = "catalogo/editar";
 
-accion_validarPermisos($nombreModulo,$redireccion);
+if (empty(validarPermisos($nombre))){
+    header("location:" . $url_base . $redireccion);        
+}else{
+    echo "puedes pasar";
+}
 ?>
 
 <!DOCTYPE html>

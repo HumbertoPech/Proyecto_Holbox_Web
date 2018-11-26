@@ -1,12 +1,18 @@
 <?php
 session_start();
-$_SESSION["tipo_usuario"]= 'Administrador';
-$_SESSION["permisos_especiales"]= array(10 => "editar restaurante" ,
-    11 => "eliminar restaurante");
+$_SESSION["tipo_usuario"]= 'proveedor';
+$_SESSION["permisos_especiales"]= array(12 => "editar restaurante" ,
+    18 => "eliminar restaurante");
 
 $nombre = "catalogo de restaurantes";
 $redireccion = "catalogo/iniciarCatalogo";
-accion_validarPermisos($nombre,$redireccion);
+ 
+if (empty(validarPermisos($nombre);)){   
+    header("location:" . $url_base . $redireccion);        
+}else{
+    echo "puedes pasar";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -71,9 +77,46 @@ accion_validarPermisos($nombre,$redireccion);
 
 <!--.contenido-->
 <div id="contenido">
-    <div>
-        <p>Esta página es para editar el catalogo,jeje</p>
-    </div>    
+
+    <!--Seccion Navegacion -->
+    <div class="nav-bar">
+        <div class="restaurante-filtro">
+            <span> Configuraciones</span>           
+        </div>
+        <div class="flex-container flex-catalogo" id="content-area">            
+            <button class="tablinks" onclick="abrirConfig(event, 'agregar')" 
+                    id="defaultOpen">Agregar restaurante</button>
+
+            <button class="tablinks" onclick="abrirConfig(event, 'eliminar')" 
+                    id="defaultOpen">Eliminar restaurante</button>
+
+           <button class="tablinks" onclick="abrirConfig(event, 'editar')" 
+                    id="defaultOpen">Editar restaurante</button>
+         </div>        
+    </div>
+    
+    <article class="seccion " id="catalogo">
+        <div>
+            <span> Bienvenido al editor de restaurantes</span>           
+        </div>
+         <div class="flex-container flex-catalogo" id="content-area">
+         </div>
+         <div id="agregar" class="tabcontent">
+           <h3>Agrega un restaurante</h3>
+           <p>London is the capital city of England.</p>
+    </div>
+    <div id="eliminar" class="tabcontent">
+                <h3>Elimina un restaurante</h3>
+                <p>London is the capital city of England.</p>
+    </div>
+
+    <div id="editar" class="tabcontent">
+                <h3>Edita un restaurante</h3>
+    </div>
+
+
+    </article>
+   
 
 </div>
 
@@ -107,45 +150,20 @@ accion_validarPermisos($nombre,$redireccion);
 </footer>
 
 <script type="text/javascript">
-           
-    //Para los filtros
-    function borrarFiltros() {
-
+     
+   function abrirConfig(evt, nombreConfig) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
     }
-
-    function buscarRestaurantes() {
-
-    	let checkboxTipo = document.getElementsByName("tipoRest[]");
-        let checkboxPrecio= document.getElementsByName("precioRest[]");
-
-        let formData = new FormData();
-        for(let i=0; i<checkboxTipo.length; i++)
-        {
-            if(checkboxTipo[i].checked){
-                formData.append(checkboxTipo[i].name, checkboxTipo[i].value);
-            }
-        }
-        for(let i=0; i<checkboxPrecio.length; i++)
-        {
-            if(checkboxPrecio[i].checked){
-                formData.append(checkboxPrecio[i].name, checkboxPrecio[i].value);
-            }
-        }
-        let xmlhttp = new XMLHttpRequest();
-
-
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	 document.getElementById("catalog-grid").innerHTML= xmlhttp.responseText;
-            }else if (xmlhttp.status == 400) {
-
-              alert('There was an error 400');
-           }
-        };
-
-        xmlhttp.open("POST", "<?php echo $url_base;?>catalogo/buscarRestaurante", true);
-        xmlhttp.send(formData);
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
+    document.getElementById(nombreConfig).style.display = "block";
+    evt.currentTarget.className += " active";
+}
 
 </script>
 
