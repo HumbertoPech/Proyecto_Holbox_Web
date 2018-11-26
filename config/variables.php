@@ -42,7 +42,7 @@ $controlador_predefinido = 'catalogo';
 * Accion por defecto
 * @global string $accion_predefinida
 */
-$accion_predefinida = 'iniciarCatalogo';
+$accion_predefinida = 'editar';
 
 /**
 * Extension del archivo del modelo
