@@ -151,7 +151,6 @@ $tipo = mysqli_real_escape_string($con, $_POST['tipo_restaurante']);
 $imagen = $_FILES['imagen_restaurante']['tmp_name'] ;
 
 // leer del archvio temporal .. el binario subido.
-// "rb" para Windows .. Linux parece q con "r" sobra ...
 $binario_contenido = addslashes(file_get_contents($imagen));
 
 //mysqli_real_escape_string($con, $_POST['telefono_restaurante']);
