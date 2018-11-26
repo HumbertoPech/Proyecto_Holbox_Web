@@ -20,8 +20,8 @@ include ('config/variables.php');
 
 /** Cargar las funciones generales */
 include ('libs/funciones.php');
-include ('libs/funciones_comprobacion.php');
 
+include ('libs/funciones_comprobacion.php');
 
 /**
 * Controlador solicitado
@@ -35,9 +35,7 @@ $controlador = '';
 */
 $accion = '';
 
-
 // Cargar controlador y accion, sino existen se cargan los predefinidos
-// definidos en variables.php
 
 if (! empty ($variables_ruta[$controlador_id]))
 	$controlador = $variables_ruta[$controlador_id];
@@ -61,7 +59,6 @@ if (file_exists ($controlador_archivo)){
 
 // Llamamos la accion o detenemos todo si no existe
 $accion_funcion = 'accion_' . $accion;
-
 if (is_callable ($accion_funcion)) {
 	$accion_funcion ();
 } else {
