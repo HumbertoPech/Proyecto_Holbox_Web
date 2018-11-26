@@ -1,30 +1,40 @@
 <?php
 //session_start();
 function get_menu(){
+    #verificar si hay  sesion activa
     global $url_base;
     $menu = array();
-    if(isset($_SESSION['tipo_usuario'])){
-        if($_SESSION['tipo_usuario'] == "Usuario"){
-            $menu['Perfil'] = "paginas/paginas_usuarios/perfil_usuario.php";
-            $menu['Feed'] = "paginas/feed.php";
-            //header("Location: ../");
-            //exit();
-        }else if($_SESSION['tipo_usuario'] == "Administrador"){
-            //$menu['perfil'] = "../paginas/paginas_administrador/perfil.php";
-            $menu['Gestionar eventos'] = "{$url_base}calendario/iniciar";
-            $menu['Feed'] = "paginas/feed.php";
-            //header("Location: ../");
-            //xit();
-        }else{
-            //echo "USUARIO NO IDENTIFICADO";
-        }
-        //return $menu;
-    }else{
-        $menu['Feed'] = "paginas/feed.php";
-        //LA OPCION DE INICIO.HTML?
-        //echo "TU NO DEBERÍAS ESTAR AQUÍ";
-        //return $menu;
+    
+    #Hacer $modulos global
+    $modulos = array(
+        "calendario de eventos" =>  "calendario/iniciar",
+        "mis publicaciones" => "publicaciones/iniciar",
+        "perfil de usuario" => "perfil/iniciar",
+        "catalogo de restaurantes" => "catalogo/iniciar",
+        "experiencias" => "experiencias/iniciar",
+        "recuperacion de cuenta" => "recuperacionCuenta/iniciar",
+        "administracion de usuarios" => "administracionUsuarios/iniciar"
+    );
+    $nombre_modulos = array(
+        "calendario de eventos" =>  "Gestionar Eventos",
+        "mis publicaciones" => "Mis publicaciones",
+        "perfil de usuario" => "Perdil",
+        "catalogo de restaurantes" => "Catalogo de restaurantes",
+        "experiencias" => "Experiencias",
+        "recuperacion de cuenta" => "Recuperacion cuenta",
+        "administracion de usuarios" => "Administracion de Usuarios"
+    );
+    
+    foreach( $modulos as $key => $contenido){
+        $temp = validarPermisos($key);
+        
+        
+            if(!empty($temp)){
+                $menu[$nombre_modulos[$key]] = $url_base.$contenido;
+            }
     }
+    
+
     return $menu;
 }
 

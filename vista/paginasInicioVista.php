@@ -261,7 +261,7 @@ session_start();
             <script>
                 $(document).ready(function(){
                     $('#CalendarioWeb').fullCalendar({
-                        events: 'funciones/base_de_datos/eventos.php',
+                        events: '<?=$url_base?>libs/eventos.php',
                         eventClick:function(calEvent, jsEvent, view){
                             $('#tituloEvento').html(calEvent.title);
                             $('#txtDescripcion').val(calEvent.descripcion);
