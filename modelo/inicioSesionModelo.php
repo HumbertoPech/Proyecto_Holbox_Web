@@ -6,6 +6,15 @@ function validarUsuario($correo, $contrasena){
     include("libs/comprobar_usuario.php");
     $datos = comprobar_ingreso($correo, $contrasena);
     if(!empty($datos)){
+        if(isset($datos['bloqueado'])){
+            $errores['bloqueado'] = "Usted ha sido bloqueado, contacté con servicio.";
+            return false;
+        }
+        if(isset($datos['num_intentos'])){
+            $errores['num_intentos'] = "Usted ha superado el número máximo de intentos. Usuario bloqueado.";
+            return false;
+        }
+
         session_start();
         $_SESSION['id_usuario'] = $datos['id_usuario'];
         $_SESSION['nombre'] = $datos['nombre'];

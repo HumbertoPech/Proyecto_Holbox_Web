@@ -7,7 +7,7 @@ USE PROYECTO_HOLBOX_DB;
 CREATE TABLE USUARIOS(
 id_usuario int auto_increment Primary Key,
 nombre_usuario varchar(255),
-correo varchar(255),
+correo varchar(255) unique,
 contrasena varchar(255),
 disponibilidad boolean default true
 ) Engine = InnoDB;
@@ -163,6 +163,33 @@ foreign key(id_usuario)
 references USUARIOS(id_usuario)
 )Engine = InnoDB;
 
+#Creamos la tabla comentarios (Experiencias comentarios)
+CREATE TABLE COMENTARIOS(
+    id_comentario int auto_increment Primary Key,
+    id_usuario int not null,
+    comentario text not null,
+    disponibilidad boolean default true,
+    foreign key(id_usuario)
+    references USUARIOS(id_usuario)
+)Engine = InnoDB;
+
+#Creamos la tabla restaurantes
+CREATE TABLE RESTAURANTES(
+    id_restaurante int auto_increment primary Key,
+    id_usuario int not null,
+    nombre_restaurante varchar(255),
+    telefono_restaurante varchar(255),
+    horario_abierto time,
+    horario_cerrado time,
+    precio varchar(255),
+    descripcion_restaurante text,
+    tipo_restaurante varchar(255),
+    imagen_restaurante longblob,
+    disponibilidad boolean default true,
+    foreign key(id_usuario)
+    references USUARIOS(id_usuario)
+)Engine = InnoDB;
+
 #Insertando Roles
 INSERT INTO ROLES(nombre_rol) VALUES
 ('Administrador'),
@@ -232,10 +259,10 @@ INSERT INTO ROLES_PERMISOS(id_rol, id_permiso) VALUES
 (3,9), (3,10), (3,11);
 
 
-Select * from roles;
+#Select * from roles;
 
-select * from permisos order by id_modulo;
-select * from permisos;
- SELECT * FROM MODULOS;
- select * from roles_permisos order by id_rol;
+#select * from permisos order by id_modulo;
+#select * from permisos;
+ #SELECT * FROM MODULOS;
+ #select * from roles_permisos order by id_rol;
 

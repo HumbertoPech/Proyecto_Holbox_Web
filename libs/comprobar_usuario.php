@@ -18,10 +18,15 @@ function comprobar_ingreso($correo, $contrasena){
     while($registro = $resultado->fetch_array(MYSQLI_ASSOC)){
         if(password_verify($contrasena, $registro['contrasena'])){
             $datos['id_usuario'] = $registro['id_usuario'];
-            $datos['nombre'] = $registro['nombre'];
+
+            $continue = comprobarAcceso($datos['id_usuario'], $conexion);
+            if(!$continue){
+                $datos['bloqueado'] = true;
+                break;
+            }
+
+            $datos['nombre'] = $registro['nombre_usuario'];
             $datos['correo'] = $registro['correo'];
-            //$datos['tipo_usuario'] = "administrador";
-            //$datos['contrasena'] = $registro['contrasena'];
             
             //Sabiendo que el usuario existe, obtener su rol y permisos especiales
             $id_usuario = $datos['id_usuario'];
@@ -33,16 +38,64 @@ function comprobar_ingreso($correo, $contrasena){
             $sentencia = "SELECT p.id_permiso, p.nombre_permiso FROM PERMISOS p JOIN PERMISOS_ESPECIALES pe ON pe.id_permiso = p.id_permiso WHERE id_usuario = {$id_usuario}";
             $resultadoPermisos = $conexion->query($sentencia);
             $permisosEspeciales = array();
-            while($registro = $resultadoPermisos->fetch_array(MYSQLI)){
+            while($registro = $resultadoPermisos->fetch_array(MYSQLI_ASSOC)){
                 $permisosEspeciales[$registro['id_permiso']] = $registro['nombre_permiso'];
             }
             $datos['permisos_especiales'] = $permisosEspeciales;
-
+            resetIntentos($datos['id_usuario'], $conexion);
+        }else{
+            $continue = comprobarIntentos($registro['id_usuario'], $conexion);
+            if(!$continue){
+                $datos['num_intentos'] = true;
+                break;
+            }
         } 
     }
 
     $con->close_conexion();
 
     return $datos;
+}
+
+function comprobarAcceso($id, $con){
+    $sentencia = "SELECT  fecha_bloqueo FROM USUARIOS_ACCESOS WHERE id_usuario = '$id'";
+    $registro = ($con->query($sentencia))->fetch_array(MYSQLI_ASSOC);
+    $bol = false;
+    if(is_null($registro['fecha_bloqueo'])){
+        $bol = true;
+    }
+    return $bol;
+       
+}
+
+function numeroDeIntentos($id, $con){
+    $sentencia = "SELECT num_intentos FROM USUARIOS_ACCESOS WHERE id_usuario = '$id'";
+    $registro = ($con->query($sentencia))->fetch_array(MYSQLI_ASSOC);
+    return $registro['num_intentos'];
+}
+
+function comprobarIntentos($id, $con){
+    $num_intentos = numeroDeIntentos($id, $con);
+    if($num_intentos > 3){
+        bloquearPorIntentos($id, $con);
+        return false;      
+    }
+    $num_intentos++;
+    $sentencia = "UPDATE USUARIOS_ACCESOS set num_intentos = '$num_intentos' WHERE id_usuario = '$id'";
+    $registro = $con->query($sentencia);
+    
+    return true;
+}
+
+function resetIntentos($id,$con){
+    $sentencia = "UPDATE USUARIOS_ACCESOS set num_intentos = 0 WHERE id_usuario = '$id'";
+    $registro = $con->query($sentencia);
+}
+
+function bloquearPorIntentos($id,$con){
+    $fecha_bloqueo =date("Y-m-d");
+    $hora_bloqueo = date('H:i:s');
+    $sentencia = "UPDATE USUARIOS_ACCESOS set fecha_bloqueo = '$fecha_bloqueo', hora_bloqueo = '$hora_bloqueo' WHERE id_usuario = '$id'";
+    $registro = $con->query($sentencia);
 }
 ?>

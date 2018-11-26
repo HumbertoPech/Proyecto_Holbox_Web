@@ -25,6 +25,8 @@ session_start();
         <input type="password" name="contrasena" id="password" placeholder="Password">
     </div>
     <?=isError($errores,'no_login');?>
+    <?=isError($errores, 'bloqueado');?>
+    <?=isError($errores, 'num_intentos');?>
     <div class="campo enviar">
         <input type="hidden" id="tipo" value="login">
         <input type="submit" class="boton" value="Iniciar Sesión"><a href="<?=$url_base?>paginas/Inicio">

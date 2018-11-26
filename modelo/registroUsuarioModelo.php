@@ -1,7 +1,7 @@
 <?php
 function validarRegistro($nombre,$correo,$contrasena,$repetir_contrasena){
     global $url_base, $errores;
-    include("libs/funciones_comprobacion.php");
+    //include("libs/funciones_comprobacion.php");
 
     //Comprobaciones antes de enviarselo a la base de datos.
     if(strlen($nombre) < 6){
