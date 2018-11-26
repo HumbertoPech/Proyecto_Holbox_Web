@@ -29,6 +29,7 @@ li{
     text-decoration: none;
     text-align: center;
 }
+
 .restaurante-filtro{
     border-bottom: solid 1px black;
 }
@@ -49,6 +50,7 @@ li{
     background-color: #ccc;
     padding: 20px;
 }
+
 article {
     float: right;
     margin-left: -210px;
@@ -76,6 +78,8 @@ section:after {
     float: left;
     display: none;
 }
+
+
 .contenedor-restaurante img{
     height: 60%;
 }
