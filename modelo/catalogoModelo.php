@@ -39,7 +39,7 @@ function generarTitulo() {
 
 function cargarPrincipal(){  
     $HTMLrespuesta= array();
-    $resultados= consultar(" ");
+    $resultados= consultar('SELECT * FROM restaurantes');
     for($i=0; $i< count($resultados); $i++){
             array_push($HTMLrespuesta,presentarResultados($resultados[$i]));
        }
@@ -50,7 +50,7 @@ function realizarBusqueda(){
 
     if(!empty($_POST)){
       $parametrosBusqueda= array();
-      $cadenaInicial= "WHERE";
+      $cadenaInicial= 'SELECT * FROM restaurantes WHERE';
     
     //SELECT * FROM `restaurantes` WHERE `precio`= "Costoso" AND `tipo` = "Restaurantes"
        
@@ -127,6 +127,21 @@ function presentarResultados($rest){
             </div>
 XYZ;
 return $columnas;
+}
+//Regresa HTML del menu
+function obtenerMenuEdicion(){
+
+    $HTMLrespuesta= array();
+
+  
+    if($_SESSION['tipo_usuario'] == "Proveedor"){
+      array_push($HTMLrespuesta, "</ul>");
+          $HTMLrespuesta= "";  
+    }else{
+      $permisosEspeciales=$_SESSION['permisos_especiales'];
+    }
+    array_push($HTMLrespuesta, "</ul>");
+    return implode(" ", $HTMLrespuesta);
 }
 
 ?>

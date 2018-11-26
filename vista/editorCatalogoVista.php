@@ -1,17 +1,18 @@
 <?php
 session_start();
-//$_SESSION["tipo_usuario"]= 'proveedor';
-//$_SESSION["permisos_especiales"]= array(90,1,14);
+$_SESSION["tipo_usuario"]= 'proveedor';
+$_SESSION["permisos_especiales"]= array(12 => "editar restaurante" ,
+    18 => "eliminar restaurante");
 
-
-$nombre = "";
-$redireccion = "catalogo/editar";
-
-if (empty(validarPermisos($nombre))){
+$nombre = "catalogo de restaurantes";
+$redireccion = "catalogo/iniciarCatalogo";
+ 
+if (empty(validarPermisos($nombre);)){   
     header("location:" . $url_base . $redireccion);        
 }else{
     echo "puedes pasar";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,7 @@ if (empty(validarPermisos($nombre))){
                             </ul>
                         </li>
                         <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="<?php echo $url_base;?>catalogo/iniciarCatalogo"> Catálogo</a></li>
+                        <li><a href="<?php echo $url_base;?>catalogo/editar"> Catálogo</a></li>
                          <?php
                         $toinclude ="01_CARPETAS Y ARCHIVOS EN DISPUTA/sistemas/sistema_login/manejador_sesiones.php";
                         include($toinclude);                        
@@ -76,43 +77,46 @@ if (empty(validarPermisos($nombre))){
 
 <!--.contenido-->
 <div id="contenido">
-    
 
-    <!--Seccion CATALOGO -->
+    <!--Seccion Navegacion -->
     <div class="nav-bar">
         <div class="restaurante-filtro">
-            <span> Selecciona tu restaurante</span>
-           
+            <span> Configuraciones</span>           
         </div>
+        <div class="flex-container flex-catalogo" id="content-area">            
+            <button class="tablinks" onclick="abrirConfig(event, 'agregar')" 
+                    id="defaultOpen">Agregar restaurante</button>
 
-        <form id="filtros-restaurantes">
+            <button class="tablinks" onclick="abrirConfig(event, 'eliminar')" 
+                    id="defaultOpen">Eliminar restaurante</button>
 
-            <div class="restaurante-filtro" name="filtro-tipo">
-                <div class="titulo-filtro"> Tipo de restaurante</div>
-                <input type="checkbox" name="tipoRest[]" value="Bares" /> Bares y discos<br />
-                <input type="checkbox" name="tipoRest[]" value="Restaurantes" /> Restaurantes<br />
-                <input type="checkbox" name="tipoRest[]" value="Postres" /> Postres<br />
+           <button class="tablinks" onclick="abrirConfig(event, 'editar')" 
+                    id="defaultOpen">Editar restaurante</button>
+         </div>        
+    </div>
+    
+    <article class="seccion " id="catalogo">
+        <div>
+            <span> Bienvenido al editor de restaurantes</span>           
+        </div>
+         <div class="flex-container flex-catalogo" id="content-area">
+         </div>
+         <div id="agregar" class="tabcontent">
+           <h3>Agrega un restaurante</h3>
+           <p>London is the capital city of England.</p>
+    </div>
+    <div id="eliminar" class="tabcontent">
+                <h3>Elimina un restaurante</h3>
+                <p>London is the capital city of England.</p>
+    </div>
 
-            </div>
-
-            <div class="restaurante-filtro" name="filtro-precio">
-                <div class="titulo-filtro"> Precio</div>
-                <input type="checkbox" name="precioRest[]" value="Costoso" /> $$$<br />
-                <input type="checkbox" name="precioRest[]" value="Medio" /> $$<br />
-                <input type="checkbox" name="precioRest[]" value="Economico" /> $<br />
-            </div>
-
-           <input type="button" id="buscar" name="buscar" value="Buscar" onclick="buscarRestaurantes()" />
-        </form>
-
+    <div id="editar" class="tabcontent">
+                <h3>Edita un restaurante</h3>
     </div>
 
 
-    <article class="seccion " id="catalogo">
-         <div class="flex-container flex-catalogo" id="catalog-grid">
-            <?php echo $catalogoPrincipal;?>
-         </div>
     </article>
+   
 
 </div>
 
@@ -146,45 +150,20 @@ if (empty(validarPermisos($nombre))){
 </footer>
 
 <script type="text/javascript">
-           
-    //Para los filtros
-    function borrarFiltros() {
-
+     
+   function abrirConfig(evt, nombreConfig) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
     }
-
-    function buscarRestaurantes() {
-
-    	let checkboxTipo = document.getElementsByName("tipoRest[]");
-        let checkboxPrecio= document.getElementsByName("precioRest[]");
-
-        let formData = new FormData();
-        for(let i=0; i<checkboxTipo.length; i++)
-        {
-            if(checkboxTipo[i].checked){
-                formData.append(checkboxTipo[i].name, checkboxTipo[i].value);
-            }
-        }
-        for(let i=0; i<checkboxPrecio.length; i++)
-        {
-            if(checkboxPrecio[i].checked){
-                formData.append(checkboxPrecio[i].name, checkboxPrecio[i].value);
-            }
-        }
-        let xmlhttp = new XMLHttpRequest();
-
-
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            	 document.getElementById("catalog-grid").innerHTML= xmlhttp.responseText;
-            }else if (xmlhttp.status == 400) {
-
-              alert('There was an error 400');
-           }
-        };
-
-        xmlhttp.open("POST", "<?php echo $url_base;?>catalogo/buscarRestaurante", true);
-        xmlhttp.send(formData);
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
+    document.getElementById(nombreConfig).style.display = "block";
+    evt.currentTarget.className += " active";
+}
 
 </script>
 

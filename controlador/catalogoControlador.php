@@ -27,15 +27,13 @@
 */
 
 function accion_iniciarCatalogo() {
-
 	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion;
 
 	/** @ignore */
 	// Incluye el modelo que corresponde
-	include('modelo/catalogoModelo.php');
-	
-    $titulo = generarTitulo(); 
 
+	include_once('modelo/catalogoModelo.php');	
+    $titulo = generarTitulo();
     $catalogoPrincipal= cargarPrincipal();
     
 	/** @ignore */
@@ -43,6 +41,15 @@ function accion_iniciarCatalogo() {
 	
     include('vista/catalogoVista.php');    
 	
+}
+function accion_editar(){
+	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion,$directorio_base;
+	// Incluye el modelo que corresponde
+	include ('vista/editorCatalogoVista.php');
+	
+}
+function accion_cargarMenu(){
+	return obtenerMenuEdicion();
 }
 /**
 * Regresa el resultado de la llamada AJAX de busqueda.
@@ -58,7 +65,6 @@ function accion_iniciarCatalogo() {
 * * @uses generarTitulo
 */
 function accion_buscarRestaurante() {
-
 	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion;
 
 	/** @ignore */
@@ -69,4 +75,6 @@ function accion_buscarRestaurante() {
 	$resultado= realizarBusqueda();
 	echo $resultado;
 }
+
+
 ?>
