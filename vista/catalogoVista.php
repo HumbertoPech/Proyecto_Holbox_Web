@@ -1,12 +1,13 @@
 <?php
 session_start();
-$_SESSION["tipo"]= 'proveedor';
-$_SESSION["permisos_especiales"]= array(0,1,14);
+//$_SESSION["tipo_usuario"]= 'proveedor';
+//$_SESSION["permisos_especiales"]= array(90,1,14);
 
-$roles= array("usuario");
+
+$nombreModulo = "";
 $redireccion = "catalogo/editar";
 
-accion_validarPermisos($nombreModulo,$permisos,$redireccion);
+accion_validarPermisos($nombreModulo,$redireccion);
 ?>
 
 <!DOCTYPE html>

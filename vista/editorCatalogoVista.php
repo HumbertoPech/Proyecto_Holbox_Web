@@ -1,15 +1,13 @@
 <?php
 session_start();
-//$_SESSION["tipo"]= 'usuario';
-//$_SESSION["permisos_especiales"]= array(0,1,14);
+$_SESSION["tipo_usuario"]= 'Administrador';
+$_SESSION["permisos_especiales"]= array(10 => "editar restaurante" ,
+    11 => "eliminar restaurante");
 
-$roles= array("proveedor");
-$permisos = array(9,10,11);
+$nombre = "catalogo de restaurantes";
 $redireccion = "catalogo/iniciarCatalogo";
-
-validarPermisos($roles,$permisos,$redireccion);
+accion_validarPermisos($nombre,$redireccion);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +41,7 @@ validarPermisos($roles,$permisos,$redireccion);
                             </ul>
                         </li>
                         <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="<?php echo $url_base;?>catalogo/iniciarCatalogo"> Catálogo</a></li>
+                        <li><a href="<?php echo $url_base;?>catalogo/editar"> Catálogo</a></li>
                          <?php
                         $toinclude ="01_CARPETAS Y ARCHIVOS EN DISPUTA/sistemas/sistema_login/manejador_sesiones.php";
                         include($toinclude);                        

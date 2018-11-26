@@ -43,28 +43,38 @@ function accion_iniciarCatalogo() {
 	
 }
 
-function accion_validarPermisos($roles,$permisos,$redireccion){
+function accion_validarPermisos($nombreModulo,$redireccion){
 	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion,$directorio_base;
-	// Incluye el modelo que corresponde
 	
-	if (count(array_intersect($_SESSION["permisos_especiales"], $permisos)) === 0) {
-	     $permisoEspecial=false; //no permisos especiales.
-	  } else {
-	    $permisoEspecial=true;
-  	}
-
- 	 $usuarioValido=  (in_array($_SESSION["tipo"],$roles) || $permisoEspecial);
-	
-	if($usuarioValido){
-		echo "puedes pasar a esta pagina";
-	}else{		
-		header("location:" . $url_base . $redireccion); 
-	}
-	/*echo $_SESSION['tipo'];
-    var_dump($_SESSION['permisos_especiales']);
-    echo $redireccion;
-	*/
+   
+	if(!empty($nombreModulo)){
+	// Incluye y crea la conexion para buscar en la bd:
+		require_once('libs/conexionCatalogo.php');  
+	    
+	    //buscando permisos del modulo
+	    $query = "SELECT p.id_permiso FROM permisos p JOIN modulos m ON p.id_modulo=m.id_modulo 
+	              WHERE m.nombre_modulo =" ."'". $nombreModulo ."'";
+	    
+	    $permisosModulo= consultarPermisos($query);
+	    	
+		//buscando permisos del rol:
+		$query= "SELECT rp.id_permiso FROM roles_permisos rp JOIN roles r ON rp.id_rol=r.id_rol 
+	              WHERE r.nombre_rol =" ."'". $$_SESSION["tipo_usuario"] ."'";
+	              
+		$permisosRol= consultarPermisos($query);
+		//uniendo permisos del rol con permisos especiales.
+		$permisosUsuario=array_unique(array_merge($permisosRol, 
+							array_keys($_SESSION['permisos_especiales'])
+						 ));		
+		//El usuario tiene almenos un permisos del modulo.
+		if (count(array_intersect($permisosModulo, $permisosUsuario)) === 0) {
+		    header("location:" . $url_base . $redireccion);  //no permisos.
+		} else {
+		    echo "puedes pasar a esta pagina";
+		}
+	}		
 }
+
 function accion_editar(){
 	global $aplicacion, $url_base, $variables_ruta, $controlador, $accion,$directorio_base;
 	// Incluye el modelo que corresponde

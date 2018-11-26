@@ -1,8 +1,7 @@
 <?php
                     /*Carga las imagenes de LOS USUARIOS*/
+include('core/Conexion.php'); 
 function consultar($query){
-
-                    include('core/Conexion.php');  
                      $conector = new Conexion();
                      $conexion= $conector ->get_conexion();                               
 
@@ -11,20 +10,28 @@ function consultar($query){
                         $resultado = $conexion->query($query);
                         if (!empty($resultado)) {
                             while($row = $resultado->fetch_assoc()){                     
-                                $bandera = true;
                                 $arrayRestaurantes[]=$row;
                             }
                             return $arrayRestaurantes;
-                        }else{
-                            console.log("No hay restaurantes para mostrar");
                         }
-                    }else{
-                        console.log( "Conexion con la base de datos fallida");
                     }
-
-return $arrayRestaurantes;
+                    return $arrayRestaurantes;
 }
-
+function consultarPermisos($query){
+        $conector = new Conexion();
+         $conexion= $conector ->get_conexion();                               
+        $idPermisos = array();
+        if($conexion){
+               
+               $resultado = $conexion->query($query);
+            if (!empty($resultado)) {
+                while($row = $resultado->fetch_array()){                     
+                 array_push($idPermisos, (int)$row['id_permiso']);
+                }
+            }
+        }
+        return $idPermisos;
+}
 function eliminar($query){
 
 }
