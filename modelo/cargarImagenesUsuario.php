@@ -1,6 +1,7 @@
 <?php
 
 function cargarImagenes($id){
+    global $url_base;
     global $arrayPublicaciones;
     global $publicacionesCount;
     /*Carga las imagenes del usuario*/                

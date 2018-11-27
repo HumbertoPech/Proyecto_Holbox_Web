@@ -22,7 +22,7 @@ $directorio_base = 'c:/xampp/htdocs/aplicacion/';
 * URL de la aplicacion
 * @global string $url_base
 */
-$url_base = 'http://localhost/Proyecto_Holbox_Web/';
+$url_base = 'http://localhost/01/02/Proyecto_Holbox_Web/';
 
 /**
 * Controlador por defecto

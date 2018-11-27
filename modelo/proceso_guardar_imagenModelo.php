@@ -19,7 +19,6 @@
                         $comentario = $_POST['comentario'];
                     }
                     $id_usuario = $_SESSION['id_usuario'];
-                    var_dump($imagen, $comentario);
                     $query = "INSERT INTO publicaciones(id_usuario, imagen, comentario) VALUES ($id_usuario, '$imagen', '".$comentario."')";
                     $resultado = $conexion->query($query); 
                     if(!$resultado){
