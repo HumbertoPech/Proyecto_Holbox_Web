@@ -1,6 +1,6 @@
 <?php
 session_start();
-$nombre = "";
+$nombre = "catalogo de restaurantes";
 $redireccion = "catalogo/editar";
 
 if (empty(validarPermisos($nombre))){
