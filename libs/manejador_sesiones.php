@@ -18,7 +18,7 @@ function get_menu(){
             //"catalogo de restaurantes" => "catalogo/iniciar",
             //"experiencias" => "experiencias/iniciar",
             "recuperacion de cuenta" => "recuperacionCuenta/iniciar",
-            "administracion de usuarios" => "administracionUsuarios/iniciar",
+            "administracion de usuarios" => "adminUsuarios/iniciar",
             "bitacora" => "bitacora/iniciar"
         );
         $nombre_modulos = array(
