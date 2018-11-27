@@ -79,8 +79,7 @@ if (empty($a)){
             <button class="tablinks" id= "tabEliminar" onclick="abrirConfig(event, 'eliminar')">
                     Eliminar restaurante</button>
 
-           <button class="tablinks" onclick="abrirConfig(event, 'editar')">Editar restaurante</button>
-         </div>        
+           </div>        
     </div>
     
     <article class="seccion " id="catalogo">
