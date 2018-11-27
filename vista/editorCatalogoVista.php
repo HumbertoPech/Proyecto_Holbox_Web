@@ -1,10 +1,5 @@
 <?php
 session_start();
-$_SESSION["tipo_usuario"]= 'usuario';
-$_SESSION["id_usuario"]= "1";
-$_SESSION["permisos_especiales"]= array(10 => "editar restaurante" ,
-    11 => "eliminar restaurante");
-
 $nombre = "catalogo de restaurantes";
 $redireccion = "catalogo/iniciarCatalogo";
  $a= validarPermisos($nombre);

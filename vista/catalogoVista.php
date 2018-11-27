@@ -1,9 +1,5 @@
 <?php
 session_start();
-//$_SESSION["tipo_usuario"]= 'proveedor';
-//$_SESSION["permisos_especiales"]= array(90,1,14);
-
-
 $nombre = "";
 $redireccion = "catalogo/editar";
 
