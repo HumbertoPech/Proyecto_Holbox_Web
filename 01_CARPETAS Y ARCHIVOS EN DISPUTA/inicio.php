@@ -61,7 +61,7 @@ session_start();
                             </ul>
                         </li>
                         <li><a href="paginas/experienciasH.php">Experiencias</a></li>
-                        <li><a href="paginas/catalogo.php">Catálogo</a></li>
+                        <li><a href="catalogo/iniciarCatalogo">Catálogo</a></li>
                         <?php
                         include("sistemas/sistema_login/manejador_sesiones.php");
                         $menu = get_Menu();
@@ -194,7 +194,7 @@ session_start();
                             <li><a href="paginas/Gastronomia.php">Gastronomía</a></li>
                             <li><a href="paginas/FloraFauna.php">Flora y Fauna</a></li>
                             <li><a href="paginas/experienciasH.php">Experiencias</a></li>
-                            <li><a href="paginas/catalogo.php">Catálogo</a></li>
+                            <li><a href="catalogo/iniciarCatalogo">Catálogo</a></li>
                             <?php
                                 $menu = get_Menu();
 
