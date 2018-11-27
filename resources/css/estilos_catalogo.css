@@ -29,6 +29,7 @@ li{
     text-decoration: none;
     text-align: center;
 }
+
 .restaurante-filtro{
     border-bottom: solid 1px black;
 }
@@ -46,13 +47,15 @@ li{
 .nav-bar {
     float: left;
     width: 20%;
-    background: #ccc;
+    background-color: #ccc;
     padding: 20px;
 }
+
 article {
-    float: left;
+    float: right;
+    margin-left: -210px;
     width: 80%;
-    background-color: #f1f1f1;
+    background-color: #ccc;
 }
 
 section:after {
@@ -61,7 +64,10 @@ section:after {
     clear: both;
 }
 
-/*imagenes de flora*/
+/*imagenes del catalogo*/
+#contenido{
+    background-color: #ccc;
+}
 .flex-catalogo > div {
     background-color:white;
     width: 300px;
@@ -72,6 +78,8 @@ section:after {
     float: left;
     display: none;
 }
+
+
 .contenedor-restaurante img{
     height: 60%;
 }
