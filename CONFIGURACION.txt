@@ -1,0 +1,15 @@
+Para poder ejecutar el programa:
+1. Primero cree la base de datos PROYECTO_HOLBOX_DB (ejecute el archivo SQL dentro de la carpeta Base_de_Datos o importelo)
+2. Cambie las variables de variables_BD y variables encontradas en la carpeta config
+    --variables_BD.php : los atributos correspondientes a su MySQLI
+    ..variables.php : configure la $url_base, según en donde se vaya a ejecutar el programa !IMPORTANTE
+
+Usuario predeterminados:
+Administrador
+    correo: admin
+    contraseña: admin123
+Proovedor
+    correo: proveedor
+    contraseña: proveedor
+Usuario
+    Registrelo
