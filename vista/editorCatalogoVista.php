@@ -10,10 +10,7 @@ $redireccion = "catalogo/iniciarCatalogo";
  $a= validarPermisos($nombre);
 if (empty($a)){   
     header("location:" . $url_base . $redireccion);
-}else{
-    echo "puedes pasar";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +83,7 @@ if (empty($a)){
             <button class="tablinks" onclick="abrirConfig(event, 'agregar')" 
                     id="defaultOpen">Agregar restaurante</button>
 
-            <button class="tablinks" onclick="abrirConfig(event, 'eliminar')">
+            <button class="tablinks" id= "tabEliminar" onclick="abrirConfig(event, 'eliminar')">
                     Eliminar restaurante</button>
 
            <button class="tablinks" onclick="abrirConfig(event, 'editar')">Editar restaurante</button>
@@ -180,15 +177,29 @@ if (empty($a)){
                   <div id="image-preview"></div>
                 </div>
                 <div class="row">
-                  <input type="submit" value="agregarRest" onsubmit=" return validateForm()">
+                  <input type="submit" value="Agregar" onsubmit=" return validateForm()">
                 </div>
               </form>
            </div>
         </div>
  
-    <div id="eliminar" class="tabcontent">
+    <div id="eliminar" class="tabcontent" >
                 <h3>Elimina un restaurante</h3>
-                <p>London is the capital city of England.</p>
+          <form  id="eliminarRest" name="eliminarRest">
+                <div class="row">
+                  <div class="col-25">
+                    <label for="tipo">Tipo </label>
+                  </div>
+                  <div class="col-75">
+                    <select id="listaRest" name="nombreRestaurante" required>
+                        <?php  obtenerListado(); ?>
+                    </select>
+                  </div>
+                </div>                
+                <div class="row">
+                  <input type="button" value="eliminar" onclick= "eliminarRestaurantes('listaRest')">
+                </div>
+              </form>      
     </div>
 
     <div id="editar" class="tabcontent">
@@ -259,6 +270,28 @@ function validateForm() {
     }
     return true;  
 }
+function eliminarRestaurantes(nombreRestaurante) {
+
+        var seleccion = document.getElementById('listaRest');
+        let xmlhttp = new XMLHttpRequest();
+
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                 alert(xmlhttp.responseText);
+                 document.getElementById("tabEliminar").click();
+            }else if (xmlhttp.status == 400) {
+
+              alert('There was an error 400');
+           }
+        };
+            let formData = new FormData();
+
+        $id= seleccion.options[seleccion.selectedIndex].value;
+        formData.append("id_restaurante", $id);
+        xmlhttp.open("POST", "<?php echo $url_base;?>catalogo/eliminarRestaurante", true);
+        xmlhttp.send(formData);
+    }
 
 
 

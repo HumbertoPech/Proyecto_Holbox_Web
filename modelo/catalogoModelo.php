@@ -39,7 +39,7 @@ function generarTitulo() {
 
 function cargarPrincipal(){  
     $HTMLrespuesta= array();
-    $resultados= consultarRestaurantes('SELECT * FROM restaurantes');
+    $resultados= consultarRestaurantes('SELECT * FROM restaurantes where disponibilidad=1');
     for($i=0; $i< count($resultados); $i++){
             array_push($HTMLrespuesta,presentarResultados($resultados[$i]));
        }
@@ -57,7 +57,7 @@ function realizarBusqueda(){
        if(isset($_POST["tipoRest"])) {
             $tiposSolicitados= array(); 
             for($i=0 ; $i<count($_POST["tipoRest"]);$i++){
-                $tipo= "tipo = '" . $_POST["tipoRest"][$i] . " ' ";
+                $tipo= "tipo_restaurante = '" . $_POST["tipoRest"][$i] . " ' ";
                 array_push($tiposSolicitados, $tipo);
             }
            
@@ -76,7 +76,7 @@ function realizarBusqueda(){
        }
 
         $cadenaConsulta= $cadenaInicial ." ". implode(" AND ", $parametrosBusqueda);
-
+        $cadenaConsulta= $cadenaConsulta. " AND disponibilidad=1";
        $resultados= consultarRestaurantes($cadenaConsulta);
 
        if(!empty($resultados)){
@@ -128,8 +128,18 @@ function presentarResultados($rest){
 XYZ;
 return $columnas;
 }
-//Regresa HTML del menu
-function obtenerMenuEdicion(){
+function hey(){
+  return "hey";
+}
+function obtenerListado(){
+  
+   $id= $_SESSION["id_usuario"];
+  $query = "sELECT * FROM restaurantes WHERE id_usuario="."'" .$id."'". "AND disponibilidad=1";
+    $resultados= consultarRestaurantes($query); 
+
+   foreach ($resultados as $restaurante) {
+    echo '<option value="'.$restaurante['id_restaurante'].'">'.$restaurante['nombre_restaurante'].'</option>';
+  }         
 }
 
 function insertarRestaurante(){
@@ -165,6 +175,14 @@ $resultado= añadir($query);
 var_dump($resultado);
 
 return true;
+}
+
+function eliminarRestaurante(){
+  require_once('libs/conexionCatalogo.php');  
+  $id= $_POST['id_restaurante'];
+  $query = "UPDATE restaurantes SET disponibilidad=false WHERE id_restaurante=$id";
+  $resultado=eliminar($query); 
+  return $resultado; 
 }
 
 ?>

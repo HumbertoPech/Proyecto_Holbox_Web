@@ -33,7 +33,21 @@ function añadir($query){
     return $resultado->error();
 
 }
+
 function eliminar($query){
+      $conector = new Conexion();
+                     $conexion= $conector ->get_conexion();                           
+
+                    if($conexion){
+                        $resultado = $conexion->query($query);
+                        if ($resultado === TRUE) {
+                            $conexion->close();
+                             return "Restaurante eliminado";
+                        }
+                    }
+                    $conexion->close();
+    return $resultado->error();
+
 
 }
 function actualizar($query){
