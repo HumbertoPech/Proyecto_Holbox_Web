@@ -144,6 +144,7 @@
 <?php
 show_comments();
 function show_comments(){
+    global $url_base;
     $comentarios = consultarComentarios();
     $claseDiv = "class=\"parrafo\"";
     $claseUsu = "class=\"usuario\"";

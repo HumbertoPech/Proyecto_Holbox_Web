@@ -88,17 +88,6 @@ if (empty($a)){
                 ?>
             </div>
         </div>
-        <div id="sesiones">
-            <?php
-            if(empty($_SESSION)){
-                echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
-                echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
-            }else{
-                echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
-                echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
-            }
-            ?>
-        </div>
     </div>
     <div>      
         <div class="container box">
