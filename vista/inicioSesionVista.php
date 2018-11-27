@@ -31,8 +31,9 @@ session_start();
     <div class="campo enviar">
         <input type="hidden" id="tipo" value="login">
         <input type="submit" class="boton" value="Iniciar Sesión"><a href="<?=$url_base?>paginas/Inicio">
-        <input type="button" value="Cancelar" class="boton"></a>
+        <input type="button" value="Cancelar" class="boton"></a>       
     </div>
+    <div> <a href="<?=$url_base?>recuperacionCuenta/recuperar">Recuperar cuenta</a></div>
 </form>
 </div>
 </body>
