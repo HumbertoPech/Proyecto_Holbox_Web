@@ -171,18 +171,24 @@ $query= "INSERT INTO restaurantes
         ($id, '$nombre', '$telefono','$horario_abierto','$horario_cerrado','$precio','$descripcion',
         '$tipo','$binario_contenido')";
 
-$resultado= añadir($query);
-var_dump($resultado);
+$res= añadir($query);
 
-return true;
+if($res){
+    echo "Agregado con exito";
+    return $res;
+} 
+  echo "Error";
+  return $res;
 }
 
 function eliminarRestaurante(){
   require_once('libs/conexionCatalogo.php');  
   $id= $_POST['id_restaurante'];
   $query = "UPDATE restaurantes SET disponibilidad=false WHERE id_restaurante=$id";
-  $resultado=eliminar($query); 
-  return $resultado; 
+  $resultado=eliminar($query);
+  if($resultado){
+    return "Eliminado con exito";
+  } 
+  return "Error";
 }
-
 ?>
