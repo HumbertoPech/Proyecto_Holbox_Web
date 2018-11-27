@@ -20,6 +20,7 @@ include ('config/variables.php');
 
 /** Cargar las funciones generales */
 include ('libs/funciones.php');
+include('libs/funciones_comprobacion.php');
 
 /**
 * Controlador solicitado

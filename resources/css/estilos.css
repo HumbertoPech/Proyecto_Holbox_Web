@@ -34,7 +34,7 @@ body {
 }
 
 .contenedor-formulario {
-    background: linear-gradient(to right, mediumpurple, lightsalmon);
+    background: rgba(51,51,51,.80);
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -92,7 +92,7 @@ body {
 }
 
 .boton {
-    background-color: #DAF7A6;
+    background-color: rgba(51,51,51,.95);
     text-align: center;
     transition: background-color .5s ease-in-out;
     display: block;
@@ -106,7 +106,7 @@ body {
 
 .boton:hover {
     cursor: pointer;
-    background-color: rgb(219, 184, 29)!important;
+    background-color: rgba(193, 66, 66,.95)!important;
 }
 
 .campo a {
@@ -117,7 +117,7 @@ body {
 /*Modal*/
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: rgba(51,51,51,.95);
     color: white;
     
 }
@@ -156,7 +156,7 @@ body {
 /* Modal Footer */
 .modal-footer {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: rgba(51,51,51,.95);
     color: white;
 }
 

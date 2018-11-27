@@ -8,8 +8,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flora y Fauna</title>
-    <link rel="stylesheet" href="../archivos_necesarios/css/estiloFloraFauna.css">
-    <link rel="stylesheet" href="../archivos_necesarios/css/estilosGenerales.css">
+    <link rel="stylesheet" href="<?=$url_base?>resources/css/estiloFloraFauna.css">
+    <link rel="stylesheet" href="<?=$url_base?>resources/css/estilosGenerales.css">
+    <script src="<?=$url_base?>resources/js/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montaga" rel="stylesheet">
 
 </head>
@@ -24,23 +25,20 @@ session_start();
             <div class="menu-general">
                 <nav>
                     <ul class ="nav">
-                        <li><a href="../inicio.php">Inicio</a></li>
+                        <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
                         <li><a href="">Secciones</a>
                             <ul>
-                                <li><a href="Historia.php">Historia</a></li>
-                                <li><a href="LugaresHolbox.php">¿Qué hacer?</a></li>
-                                <li><a href="Gastronomia.php">Gastronomía</a></li>
-                                <li><a href="FloraFauna.php">Flora y Fauna</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                                <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                                <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             </ul>
                         </li>
-                        <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="catalogo.php">Catálogo</a></li>
                         <?php
-                        include("../sistemas/sistema_login/manejador_sesiones.php");
+                        include("libs/manejador_sesiones.php");
                         $menu = get_Menu();
 
                         foreach( $menu as $opcion => $link){
-                            $link = "../".$link;
                             echo "<li><a href=\"$link\">$opcion</a></li>";
                         }
                         ?>
@@ -50,11 +48,12 @@ session_start();
             <div id="sesiones">
                 <?php
                 if(empty($_SESSION)){
-                    echo "<label><a href='../sistemas/sistema_login/login.php'>Iniciar Sesión  </a></label>";
-                    echo "<label><a href='../sistemas/sistema_signup/signup.php'> Registrarse</a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
+                    echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
+                    echo "<script src = '{$url_base}resources/js/autologout.js'></script>";
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
-                    echo "<label><a href='../sistemas/sistema_login/logout.php'>Cerrar Sesión </a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
                 ?>
             </div>
@@ -65,7 +64,7 @@ session_start();
 
     <div class= "seccion" id="portada">
         <div class= "seccion" id=" portada-imagenes">
-            <img id="img-portada" src="../images/floraFauna/Luna-de-Miel-en-Holbox.jpg" alt="arbol en medio de playa" style="height: 100%" width=100%>
+            <img id="img-portada" src="<?=$url_base?>resources/images/floraFauna/Luna-de-Miel-en-Holbox.jpg" alt="arbol en medio de playa" style="height: 100%" width=100%>
         </div>
     </div>
     <div class="seccion menu" id="menuContenido">
@@ -97,7 +96,7 @@ session_start();
 
         <div class="flex-container flex-flora">
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/mangle.jpg" alt="mangle" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/mangle.jpg" alt="mangle" style="width:100%">
                 <div class="descripcion" >
                     <p>Mangle</p>
                 </div>
@@ -108,7 +107,7 @@ session_start();
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/mangleBlanco.jpg" alt="flor mangle blanco" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/mangleBlanco.jpg" alt="flor mangle blanco" style="width:100%">
                 <div class="descripcion">
                     <p>Flor de mangle blanco</p>
                 </div>
@@ -118,7 +117,7 @@ session_start();
                 </span>
             </div>
             <div class="contenedor-flora" >
-                <img src="../images/floraFauna/avicennia%20germinans.jpg" alt="flor de mangle negro" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/avicennia%20germinans.jpg" alt="flor de mangle negro" style="width:100%">
                 <div class="descripcion">
                     <p> Flor de mangle negro</p>
                 </div>
@@ -129,7 +128,7 @@ session_start();
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/berlandieriana.jpg" alt="flor de juluub" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/berlandieriana.jpg" alt="flor de juluub" style="width:100%">
                 <div class="descripcion">
                     <p>Juluub</p>
                 </div>
@@ -139,7 +138,7 @@ session_start();
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/cruceta.JPG" alt="cactus cruceta" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/cruceta.JPG" alt="cactus cruceta" style="width:100%">
                 <div class="descripcion">
                     <p>Cactús cruceta</p>
                 </div>
@@ -149,7 +148,7 @@ session_start();
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/palma%20(2).jpg" alt="palma real" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/palma%20(2).jpg" alt="palma real" style="width:100%">
                 <div class="descripcion">
                     <p>Palma Real</p>
                 </div>
@@ -158,7 +157,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/keyense.jpg" alt="flor ya'ax k'aax" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/keyense.jpg" alt="flor ya'ax k'aax" style="width:100%">
                 <div class="descripcion">
                     <p>Ya'ax k'aax</p>
                 </div>
@@ -167,7 +166,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/palo%20de%20tinte-%20adentro.jpg" alt="palo de tinte" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/palo%20de%20tinte-%20adentro.jpg" alt="palo de tinte" style="width:100%">
                 <div class="descripcion">
                     <p>Palo de tinte</p>
                 </div>
@@ -176,7 +175,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/planta-bromelia.jpg" alt="bromelia" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/planta-bromelia.jpg" alt="bromelia" style="width:100%">
                 <div class="descripcion">
                     <p>Bromelias</p>
                 </div>
@@ -185,7 +184,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/bromélia.jpg" alt="bromelia" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/bromélia.jpg" alt="bromelia" style="width:100%">
                 <div class="descripcion">
                     <p>Diversas bromelias</p>
                 </div>
@@ -194,7 +193,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/orquideas.jpg" alt="orquidea blanca" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/orquideas.jpg" alt="orquidea blanca" style="width:100%">
                 <div class="descripcion">
                     <p>Orquídea blanca</p>
                 </div>
@@ -203,7 +202,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 </span>
             </div>
             <div class="contenedor-flora">
-                <img src="../images/floraFauna/bletantillana%20orquidea.jpg" alt="orquidea morada" style="width:100%">
+                <img src="<?=$url_base?>resources/images/floraFauna/bletantillana%20orquidea.jpg" alt="orquidea morada" style="width:100%">
                 <div class="descripcion">
                     <p>Orquidea morada</p>
                 </div>
@@ -212,7 +211,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 </span>
             </div>
             <div class="contenedor-flora" >
-                <img src="../images/floraFauna/Metopium_brownei_07.jpg" alt="arbol chechem" style="width:100%" >
+                <img src="<?=$url_base?>resources/images/floraFauna/Metopium_brownei_07.jpg" alt="arbol chechem" style="width:100%" >
                 <div class="descripcion">
                     <p>Chechen</p>
                 </div>
@@ -234,37 +233,37 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
         <div class="fila-flex-fauna flex-container">
             <div class="columna-flex-fauna">
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/espatula%20rosada.jpg" alt="espatula rosada" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/espatula%20rosada.jpg" alt="espatula rosada" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna"> Espátula Rosada</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/hocofaisan.jpg" alt="Hocofaisan" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/hocofaisan.jpg" alt="Hocofaisan" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna"> Hocofaisan</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/puma.jpg" alt="Puma" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/puma.jpg" alt="Puma" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna"> Puma</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/mono%20araña.jpg" alt="Mono araña" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/mono%20araña.jpg" alt="Mono araña" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna"> Mono Araña</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/langosta.jpg" alt="Langosta" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/langosta.jpg" alt="Langosta" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna"> Langosta </b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/manaties.jpg" alt="Manati" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/manaties.jpg" alt="Manati" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Manatí</b>
                     </div>
@@ -272,35 +271,35 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
             </div>
             <div class="columna-flex-fauna">
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/flamingos.jpg" alt="Flamingos" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/flamingos.jpg" alt="Flamingos" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Flamingos </b>
                     </div>
                 </div>
 
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/garza1.jpg" alt="Garza" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/garza1.jpg" alt="Garza" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Garza </b>
                     </div>
                 </div>
 
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/ocelotes.jpg" alt="Ocelote" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/ocelotes.jpg" alt="Ocelote" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Ocelote</b>
                     </div>
                 </div>
 
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/cacerola.jpg" alt="Cacerola Marina" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/cacerola.jpg" alt="Cacerola Marina" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna"> Cacerola Marina</b>
                     </div>
                 </div>
 
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/tiburon%20ballena.jpg" alt="Tiburón ballena" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/tiburon%20ballena.jpg" alt="Tiburón ballena" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna"> Tiburón ballena</b>
                     </div>
@@ -309,38 +308,38 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
             </div>
             <div class="columna-flex-fauna">
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/jaribu.jpg" alt="Cigueñas jabiru" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/jaribu.jpg" alt="Cigueñas jabiru" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Cigueñas jabirú</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/mapache1.jpg" alt="Mapache" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/mapache1.jpg" alt="Mapache" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Mapache</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/cocodrilo.jpg" alt="Cocodrilo" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/cocodrilo.jpg" alt="Cocodrilo" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Cocodrilo</b>
                     </div>
                 </div>
 
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/jaguar.jpg" alt="Jaguar" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/jaguar.jpg" alt="Jaguar" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Jaguar</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/mantarrayas.jpg" alt="Mantarraya" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/mantarrayas.jpg" alt="Mantarraya" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Mantarraya</b>
                     </div>
                 </div>
                 <div class="contenedor-img-fauna">
-                    <img src="../images/floraFauna/tortuga-blanca-4-1.jpg" alt="Tortuga Blanca" style="width: 100%">
+                    <img src="<?=$url_base?>resources/images/floraFauna/tortuga-blanca-4-1.jpg" alt="Tortuga Blanca" style="width: 100%">
                     <div class="overlay">
                         <b class="nombreFauna">Tortuga Blanca</b>
                     </div>
@@ -358,18 +357,15 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                 <div class="tamano-7" id="menu-footer">
                     <nav>
                         <ul>
-                            <li><a href="../inicio.php">Inicio</a></li>
-                            <li><a href="Historia.php">Historia</a></li>
-                            <li><a href="LugaresHolbox.php">¿Qué hacer?</a></li>
-                            <li><a href="Gastronomia.php">Gastronomía</a></li>
-                            <li><a href="FloraFauna.php">Flora y Fauna</a></li>
-                            <li><a href="experienciasH.php">Experiencias</a></li>
-                            <li><a href="catalogo.php">Catálogo</a></li>
+                            <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                            <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                            <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             <?php
                                 $menu = get_Menu();
 
                                 foreach( $menu as $opcion => $link){
-                                    $link = "../".$link;
                                     echo "<li><a href=\"$link\">$opcion</a></li>";
                                 }
                             ?>

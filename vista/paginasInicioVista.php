@@ -1,20 +1,21 @@
 <?php
 session_start();
+//include("../config/variables.php")
 ?>
 
 <!DOCTYPE html>
 <html lang="es-Mx">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="archivos_necesarios/css/estilosInicio.css">
-        <link rel="stylesheet" href="archivos_necesarios/css/estilosGenerales.css">
+        <link rel="stylesheet" href="<?=$url_base?>resources/css/estilosInicio.css">
+        <link rel="stylesheet" href="<?=$url_base?>resources/css/estilosGenerales.css">
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montaga'>
-        <script src="archivos_necesarios/js/jquery.min.js"></script>
-        <script src="archivos_necesarios/js/moment.min.js"></script>
-        <link rel="stylesheet" href="archivos_necesarios/css/fullcalendar.min.css">
-        <link rel="stylesheet" href="archivos_necesarios/css/estilos.css">
-        <script src="archivos_necesarios/js/fullcalendar.min.js"></script>
-        <script src="archivos_necesarios/js/es.js"></script>
+        <script src="<?=$url_base?>resources/js/jquery.min.js"></script>
+        <script src="<?=$url_base?>resources/js/moment.min.js"></script>
+        <link rel="stylesheet" href="<?=$url_base?>resources/css/fullcalendar.min.css">
+        <link rel="stylesheet" href="<?=$url_base?>resources/css/estilos.css">
+        <script src="<?=$url_base?>resources/js/fullcalendar.min.js"></script>
+        <script src="<?=$url_base?>resources/js/es.js"></script>
         <style>
             .video {
                 background-color: rgba(252,211,21,.35);
@@ -51,19 +52,17 @@ session_start();
             <div class="menu-general">
                 <nav>
                     <ul class ="nav">
-                        <li><a href="inicio.php">Inicio</a></li>
+                        <li><a href="<?= $url_base ?>paginas/Inicio">Inicio</a></li>
                         <li><a href="">Secciones</a>
                             <ul>
-                                <li><a href="paginas/Historia.php">Historia</a></li>
-                                <li><a href="paginas/LugaresHolbox.php">¿Qué hacer?</a></li>
-                                <li><a href="paginas/Gastronomia.php">Gastronomía</a></li>
-                                <li><a href="paginas/FloraFauna.php">Flora y Fauna</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                                <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                                <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             </ul>
                         </li>
-                        <li><a href="paginas/experienciasH.php">Experiencias</a></li>
-                        <li><a href="paginas/catalogo.php">Catálogo</a></li>
                         <?php
-                        include("sistemas/sistema_login/manejador_sesiones.php");
+                        include("libs/manejador_sesiones.php");
                         $menu = get_Menu();
 
                         foreach( $menu as $opcion => $link){
@@ -76,11 +75,12 @@ session_start();
             <div id="sesiones">
                 <?php
                 if(empty($_SESSION)){
-                    echo "<label><a href='sistemas/sistema_login/login.php'>Iniciar Sesión  </a></label>";
-                    echo "<label><a href='sistemas/sistema_signup/signup.php'> Registrarse</a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
+                    echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
+                    echo "<script src = '{$url_base}resources/js/autologout.js'></script>";
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
-                    echo "<label><a href='sistemas/sistema_login/logout.php'>Cerrar Sesión </a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
                 ?>
             </div>
@@ -89,23 +89,23 @@ session_start();
             <div class="slider">
                 <ul>
                     <li>
-                        <img src="images/Inicio/slider-inicio.jpg" alt="Inicio" title="Inicio">
+                        <img src="<?=$url_base?>resources/images/Inicio/slider-inicio.jpg" alt="Inicio" title="Inicio">
                         <div class="image-text"><span>Bienvenido, disfrute de las maravillas de <b>Holbox</b>.</span></div>
                     </li>
                     <li>
-                        <img src="images/Inicio/slider-historia.jpg" alt="Historia" title="historia">
+                        <img src="<?=$url_base?>resources/images/Inicio/slider-historia.jpg" alt="Historia" title="historia">
                         <div class="image-text"><span>Conozca la fascinante historia de <b>Holbox</b>.</span></div>
                     </li>
                     <li>
-                        <img src="images/Inicio/slider-todo.jpg" alt="que hacer?" title="¿Qué hacer?">
+                        <img src="<?=$url_base?>resources/images/Inicio/slider-todo.jpg" alt="que hacer?" title="¿Qué hacer?">
                         <div class="image-text"><span>Le proporcionamos una lista de lugares que debe conocer sobre <b>Holbox</b>.</span></div>
                     </li>
                     <li>
-                        <img src="images/Inicio/slide-food2.jpg" alt="comida" title="Comida">
+                        <img src="<?=$url_base?>resources/images/Inicio/slide-food2.jpg" alt="comida" title="Comida">
                         <div class="image-text"><span>La rica comida lo enamorará.</span></div>
                     </li>
                     <li>
-                        <img src="images/Inicio/slider-flora-fauna.jpg" alt="flora y fauna" title="Flora y Fauna">
+                        <img src="<?=$url_base?>resources/images/Inicio/slider-flora-fauna.jpg" alt="flora y fauna" title="Flora y Fauna">
                         <div class="image-text"><span>Conozca la famosa luminiscencia.</span></div>
                     </li>
                 </ul>
@@ -135,7 +135,7 @@ session_start();
                 </div>
                 <div class="tamano-8 video">
                     <h3>Siente la experiencia.</h3>
-                    <video id="video-experiencia" src="video/To%20my%20Holbox.webm" width="60%"></video>
+                    <video id="video-experiencia" src="<?=$url_base?>resources/videos/To%20my%20Holbox.webm" width="60%"></video>
                     <div id="video-over">Toca el video para ampliar.</div>
                 </div>
                 
@@ -188,13 +188,11 @@ session_start();
                 <div class="tamano-7" id="menu-footer">
                     <nav>
                         <ul>
-                            <li><a href="inicio.php">Inicio</a></li>
-                            <li><a href="paginas/Historia.php">Historia</a></li>
-                            <li><a href="paginas/LugaresHolbox.php">¿Qué hacer?</a></li>
-                            <li><a href="paginas/Gastronomia.php">Gastronomía</a></li>
-                            <li><a href="paginas/FloraFauna.php">Flora y Fauna</a></li>
-                            <li><a href="paginas/experienciasH.php">Experiencias</a></li>
-                            <li><a href="paginas/catalogo.php">Catálogo</a></li>
+                            <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                            <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                            <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             <?php
                                 $menu = get_Menu();
 
@@ -260,7 +258,7 @@ session_start();
             <script>
                 $(document).ready(function(){
                     $('#CalendarioWeb').fullCalendar({
-                        events: 'funciones/base_de_datos/eventos.php',
+                        events: '<?=$url_base?>libs/eventos.php',
                         eventClick:function(calEvent, jsEvent, view){
                             $('#tituloEvento').html(calEvent.title);
                             $('#txtDescripcion').val(calEvent.descripcion);

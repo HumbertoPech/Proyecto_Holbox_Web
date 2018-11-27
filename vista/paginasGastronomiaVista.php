@@ -7,8 +7,9 @@ session_start();
     <head>
         <meta charset="utf-8">
 
-        <link rel="stylesheet" href="../archivos_necesarios/css/estiloComida.css">
-        <link rel="stylesheet" href="../archivos_necesarios/css/estilosGenerales.css">
+        <link rel="stylesheet" href="<?=$url_base?>resources/css/estiloComida.css">
+        <link rel="stylesheet" href="<?=$url_base?>resources/css/estilosGenerales.css">
+        <script src="<?=$url_base?>resources/js/jquery.min.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Montaga' rel='stylesheet'>   
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimun-scale=1.0">
     </head>
@@ -21,23 +22,21 @@ session_start();
             <div class="menu-general">
                 <nav>
                     <ul class ="nav">
-                        <li><a href="../inicio.php">Inicio</a></li>
+                        <li><a href="<?$url_base?>paginas/Inicio">Inicio</a></li>
                         <li><a href="">Secciones</a>
                             <ul>
-                                <li><a href="Historia.php">Historia</a></li>
-                                <li><a href="LugaresHolbox.php">¿Qué hacer?</a></li>
-                                <li><a href="Gastronomia.php">Gastronomía</a></li>
-                                <li><a href="FloraFauna.php">Flora y Fauna</a></li>
+                                <li><a href="<?=$url_base?>paginas/inicio">Inicio</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                                <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                                <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             </ul>
                         </li>
-                        <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="catalogo.php">Catálogo</a></li>
                         <?php
-                        include("../sistemas/sistema_login/manejador_sesiones.php");
+                        include("libs/manejador_sesiones.php");
                         $menu = get_Menu();
 
                         foreach( $menu as $opcion => $link){
-                            $link = "../".$link;
                             echo "<li><a href=\"$link\">$opcion</a></li>";
                         }
                         ?>
@@ -47,11 +46,12 @@ session_start();
             <div id="sesiones">
                 <?php
                 if(empty($_SESSION)){
-                    echo "<label><a href='../sistemas/sistema_login/login.php'>Iniciar Sesión  </a></label>";
-                    echo "<label><a href='../sistemas/sistema_signup/signup.php'> Registrarse</a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
+                    echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
+                    echo "<script src = '{$url_base}resources/js/autologout.js'></script>";
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
-                    echo "<label><a href='../sistemas/sistema_login/logout.php'>Cerrar Sesión </a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
                 ?>
             </div>
@@ -62,7 +62,7 @@ session_start();
             <main>
                 <article>
                     <h2>Pescado Frito</h2>
-                    <img src="../images/comida/imagen_1.jpg" alt="imagen pescado frito">
+                    <img src="<?=$url_base?>resources/images/comida/imagen_1.jpg" alt="imagen pescado frito">
                     <p>Pescados y mariscos frescos son parte de la comida típica que no puedes dejar de probar, algunos de los platillos recomendados son el ceviche, unas empanadas de pescado, una sabrosa langosta, cocteles de camarones, almejas, todos con una preparación deliciosa que te va a fascinar.</p>
 
                     <p> La gastronomía de Isla Holbox sobresale por su cosmopolitismo, suntuosidad y su capacidad innovadora. Es un aspecto que complementa de manera perfecta a los muchos otros atractivos con los que cuenta, esta auténtica perla del Caribe Mexicano: en Holbox, pequeña isla quintanarroense, se pueden hallar creaciones culinarias de los cinco continentes. Es un auténtico carnaval de sabores y aromas que cautiva a los lugareños y turistas.</p>
@@ -70,14 +70,14 @@ session_start();
                 </article>
                 <article>
                     <h2>Pizza de langosta</h2>
-                    <img src="../images/comida/imagen_2.jpg" alt="imagen pizza de langosta">
+                    <img src="<?=$url_base?>resources/images/comida/imagen_2.jpg" alt="imagen pizza de langosta">
                     <p>De igual manera, la gastronomía de Holbox comprende menús tanto regionales como de origen internacional o una combinación de ellos, con una población cosmopolita y su gran afluencia turística, la propuesta culinaria es diversa y de calidad. Es por ello que los platillos con influencia maya también pueden complementarse con una propuesta de la cocina italiana tradicional, logrando así una deliciosa pizza de langosta que es un manjar; otras opciones que seguro también te gustará probar son los cortes de carnes, los diferentes platillos de cocina fusión y gourmet, que ofrecen sabrosas comidas para degustar con hermosas vistas del mar.</p>
 
                     <a href="#" class="boton">Leer mas</a>
                 </article>
                 <article>
                     <h2>Ceviche</h2>
-                    <img src="../images/comida/imagen_3.jpg" alt="imagen ceviche">
+                    <img src="<?=$url_base?>resources/images/comida/imagen_3.jpg" alt="imagen ceviche">
                     <p>Complemento ideal para tu selección de platillos, una deliciosa agua de coco con ron, es la bebida perfecta para disfrutar.</p>
 
                     <p> Además de este disfrute de sus tradiciones culinarias, se pueden hallar otras opciones para divertirse en Isla Holbox, tales como los recorridos a caballo por las playas del lugar, las exploraciones por los manglares cercanos, la práctica del kitesurf, las excursiones a sitios arqueológicos famosos de esta región maya, como Ek Balam, Chichen Itza, Tulum y Uxmal; y visitas a hermosas ciudades de la Península de Yucatán, como es el caso de la blanca Mérida o de la notable Valladolid.</p>
@@ -89,7 +89,7 @@ session_start();
                 <h2>Otros posts</h2>
                 <ul>
                     <li><a href="http://google.com" target="_blank">Ir a Google </a></li>
-                    <li><a href="../pdf/holbox.pdf" download>Descargar informacion</a></li>
+                    <li><a href="<?=$url_base?>resources/pdf/holbox.pdf" download>Descargar informacion</a></li>
                     <li><a href="https://www.instagram.com/holboxlosangeles/" target="_blank">Instagram</a></li>
                 </ul>
             </aside>
@@ -101,18 +101,15 @@ session_start();
                 <div class="tamano-7" id="menu-footer">
                     <nav>
                         <ul>
-                            <li><a href="../inicio.php">Inicio</a></li>
-                            <li><a href="Historia.php">Historia</a></li>
-                            <li><a href="LugaresHolbox.php">¿Qué hacer?</a></li>
-                            <li><a href="Gastronomia.php">Gastronomía</a></li>
-                            <li><a href="FloraFauna.php">Flora y Fauna</a></li>
-                            <li><a href="experienciasH.php">Experiencias</a></li>
-                            <li><a href="catalogo.php">Catálogo</a></li>
+                            <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                            <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                            <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             <?php
                                 $menu = get_Menu();
 
                                 foreach( $menu as $opcion => $link){
-                                    $link = "../".$link;
                                     echo "<li><a href=\"$link\">$opcion</a></li>";
                                 }
                             ?>

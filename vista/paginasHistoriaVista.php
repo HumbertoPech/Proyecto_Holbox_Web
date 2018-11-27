@@ -12,9 +12,9 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Historia Holbox</title>
     <link href='https://fonts.googleapis.com/css?family=Montaga' rel='stylesheet'>
-    <link rel="stylesheet" href="../archivos_necesarios/css/estilosGenerales.css">
-
-    <link rel="stylesheet" href="../archivos_necesarios/css/estiloHistoria.css">
+    <link rel="stylesheet" href="<?=$url_base?>resources/css/estilosGenerales.css">
+    <script src="<?=$url_base?>resources/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<?=$url_base?>resources/css/estiloHistoria.css">
 
 <body>
 <header class="header-general">
@@ -25,23 +25,20 @@ session_start();
             <div class="menu-general">
                 <nav>
                     <ul class ="nav">
-                        <li><a href="../inicio.php">Inicio</a></li>
+                        <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
                         <li><a href="">Secciones</a>
                             <ul>
-                                <li><a href="Historia.php">Historia</a></li>
-                                <li><a href="LugaresHolbox.php">¿Qué hacer?</a></li>
-                                <li><a href="Gastronomia.php">Gastronomía</a></li>
-                                <li><a href="FloraFauna.php">Flora y Fauna</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                                <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                                <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             </ul>
                         </li>
-                        <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="catalogo.php">Catálogo</a></li>
                         <?php
-                        include("../sistemas/sistema_login/manejador_sesiones.php");
+                        include("libs/manejador_sesiones.php");
                         $menu = get_Menu();
 
                         foreach( $menu as $opcion => $link){
-                            $link = "../".$link;
                             echo "<li><a href=\"$link\">$opcion</a></li>";
                         }
                         ?>
@@ -51,11 +48,12 @@ session_start();
             <div id="sesiones">
                 <?php
                 if(empty($_SESSION)){
-                    echo "<label><a href='../sistemas/sistema_login/login.php'>Iniciar Sesión  </a></label>";
-                    echo "<label><a href='../sistemas/sistema_signup/signup.php'> Registrarse</a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
+                    echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
+                    echo "<script src = '{$url_base}resources/js/autologout.js'></script>";
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
-                    echo "<label><a href='../sistemas/sistema_login/logout.php'>Cerrar Sesión </a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
                 ?>
             </div>
@@ -80,7 +78,7 @@ session_start();
             <div class="fondo">
                 <section id="inicios">
                     <div>
-                        <div class="caja-imagen"><img  src="../images/historia/Historia.jpg" alt="Principios del pueblo"></div>
+                        <div class="caja-imagen"><img  src="<?=$url_base?>resources/images/historia/Historia.jpg" alt="Principios del pueblo"></div>
                         <p >
                             Para conocer la historia de Holbox como pueblo es necesario remontarse a julio de 1847, mes en que
                             dio
@@ -109,7 +107,7 @@ session_start();
                     </p>
         
                     <div class="caja-imagen">
-                            <img style="float: right; margin: 15px;" class="imagenes-izq" src="../images/historia/d41-235x300.png" alt="Mapa Antiguo">
+                            <img style="float: right; margin: 15px;" class="imagenes-izq" src="<?=$url_base?>resources/images/historia/d41-235x300.png" alt="Mapa Antiguo">
                         <p>
                             Cuando el Ejército Yucateco se entero, prohibió dicha ocupación y mando la evacuación de la isla
                             ante el temor de otros ataques. Sin embargo los refugiados se negaron a abandonar la isla. En 1854, 
@@ -138,7 +136,7 @@ session_start();
                 </section>
         
                 <section>
-                    <div class="caja-imagen"><img src="../images/historia/pesca.jpg" alt="Barcos Pesqueros"></div>
+                    <div class="caja-imagen"><img src="<?=$url_base?>resources/images/historia/pesca.jpg" alt="Barcos Pesqueros"></div>
                     <p>
                         El 24 de noviembre de 1902, se creó el territorio federal de Quintana Roo al dividir la Península de
                         Yucatán en tres estados separados e independientes.
@@ -193,10 +191,10 @@ session_start();
             <div id="imagenes">
                 <figure>
                     <!--<img src="images/barco.jpg" alt="Barco Pescamex">-->
-                    <img src="../images/historia/boy.jpg" alt="Joven con pelícano">
-                    <img src="../images/historia/casas.jpg" alt="Casas antiguas">
-                    <img src="../images/historia/muelle.jpg" alt="Muelle">
-                    <img src="../images/historia/isla.jpg" alt="Mapa de la isla">
+                    <img src="<?=$url_base?>resources/images/historia/boy.jpg" alt="Joven con pelícano">
+                    <img src="<?=$url_base?>resources/images/historia/casas.jpg" alt="Casas antiguas">
+                    <img src="<?=$url_base?>resources/images/historia/muelle.jpg" alt="Muelle">
+                    <img src="<?=$url_base?>resources/images/historia/isla.jpg" alt="Mapa de la isla">
         
                 </figure>
             </div>
@@ -208,18 +206,15 @@ session_start();
                     <div class="tamano-7" id="menu-footer">
                         <nav>
                             <ul>
-                                <li><a href="../inicio.php">Inicio</a></li>
-                                <li><a href="Historia.php">Historia</a></li>
-                                <li><a href="LugaresHolbox.php">¿Qué hacer?</a></li>
-                                <li><a href="Gastronomia.php">Gastronomía</a></li>
-                                <li><a href="FloraFauna.php">Flora y Fauna</a></li>
-                                <li><a href="experienciasH.php">Experiencias</a></li>
-                                <li><a href="catalogo.php">Catálogo</a></li>
+                                <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                                <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                                <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                                 <?php
                                     $menu = get_Menu();
 
                                     foreach( $menu as $opcion => $link){
-                                        $link = "../".$link;
                                         echo "<li><a href=\"$link\">$opcion</a></li>";
                                     }
                                 ?>
