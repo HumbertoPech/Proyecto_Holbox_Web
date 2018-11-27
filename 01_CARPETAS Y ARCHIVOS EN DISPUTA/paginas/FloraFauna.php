@@ -34,7 +34,7 @@ session_start();
                             </ul>
                         </li>
                         <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="catalogo.php">Catálogo</a></li>
+                        <li><a href="catalogo/iniciarCatalogo">Catálogo</a></li>
                         <?php
                         include("../sistemas/sistema_login/manejador_sesiones.php");
                         $menu = get_Menu();
@@ -364,7 +364,7 @@ Roystonea regia, conocida como palma real, es una especie de palma cuya altura, 
                             <li><a href="Gastronomia.php">Gastronomía</a></li>
                             <li><a href="FloraFauna.php">Flora y Fauna</a></li>
                             <li><a href="experienciasH.php">Experiencias</a></li>
-                            <li><a href="catalogo.php">Catálogo</a></li>
+                            <li><a href="catalogo/iniciarCatalogo">Catálogo</a></li>
                             <?php
                                 $menu = get_Menu();
 
