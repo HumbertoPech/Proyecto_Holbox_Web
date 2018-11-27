@@ -10,6 +10,7 @@ session_start();
         <link href='https://fonts.googleapis.com/css?family=Montaga' rel='stylesheet'>
         <link rel="stylesheet" href="<?=$url_base?>resources/css/estilolugaresHolbox.css">
         <link rel="stylesheet" href="<?=$url_base?>resources/css/estilosGenerales.css">
+        <script src="<?=$url_base?>resources/js/jquery.min.js"></script>
     </head>
     <body>
 
@@ -32,14 +33,11 @@ session_start();
                                 <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             </ul>
                         </li>
-                        <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="catalogo.php">Catálogo</a></li>
                         <?php
                         include("libs/manejador_sesiones.php");
                         $menu = get_Menu();
 
                         foreach( $menu as $opcion => $link){
-                            $link = "../".$link;
                             echo "<li><a href=\"$link\">$opcion</a></li>";
                         }
                         ?>
@@ -52,6 +50,7 @@ session_start();
                     echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
                     echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
+                    echo "<script src = '{$url_base}resources/js/autologout.js'></script>";
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
                     echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
@@ -458,13 +457,10 @@ session_start();
                             <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
                             <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
                             <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
-                            <li><a href="experienciasH.php">Experiencias</a></li>
-                            <li><a href="catalogo.php">Catálogo</a></li>
                             <?php
                                 $menu = get_Menu();
 
                                 foreach( $menu as $opcion => $link){
-                                    $link = "../".$link;
                                     echo "<li><a href=\"$link\">$opcion</a></li>";
                                 }
                             ?>

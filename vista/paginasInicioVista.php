@@ -61,8 +61,6 @@ session_start();
                                 <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             </ul>
                         </li>
-                        <li><a href="paginas/experienciasH.php">Experiencias</a></li>
-                        <li><a href="paginas/catalogo.php">Catálogo</a></li>
                         <?php
                         include("libs/manejador_sesiones.php");
                         $menu = get_Menu();
@@ -80,6 +78,7 @@ session_start();
                     echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
                     echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
+                    echo "<script src = '{$url_base}resources/js/autologout.js'></script>";
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
                     echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
@@ -194,8 +193,6 @@ session_start();
                             <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
                             <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
                             <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
-                            <li><a href="paginas/experienciasH.php">Experiencias</a></li>
-                            <li><a href="paginas/catalogo.php">Catálogo</a></li>
                             <?php
                                 $menu = get_Menu();
 

@@ -5,6 +5,11 @@ function get_menu(){
     global $url_base;
     $menu = array();
     
+    #experienciasm catalogo y feed será visible para todos
+    $menu['Feed'] = $url_base . "feed/iniciar";
+    $menu['Experiencias'] = $url_base . "experiencias/iniciar";
+    $menu['Catalogo'] = $url_base . "catalogo/iniciar";
+    
     #Hacer $modulos global
     $modulos = array(
         "calendario de eventos" =>  "calendario/iniciar",
