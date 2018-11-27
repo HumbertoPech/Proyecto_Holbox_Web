@@ -18,7 +18,7 @@ if (empty(validarPermisos($nombre))){
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montaga'>
     <title> <?php  echo $aplicacion;?> </title>
     
-    <link rel="stylesheet" href="<?php echo $url_base;?>resources/css/estilosGenerales.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo $url_base;?>resources/css/estilos_catalogo.css" type="text/css">
 </head>
 
 <body>
