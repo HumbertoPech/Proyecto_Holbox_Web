@@ -1,7 +1,8 @@
 <?php
-function consultarPermisos($query){
+include_once('core/Conexion.php');
 
-include_once('core/Conexion.php');  
+function consultarPermisos($query){
+  
         $conector = new Conexion();
          $conexion= $conector ->get_conexion();                               
         $idPermisos = array();

@@ -8,9 +8,9 @@ $nombre = "";
 $redireccion = "catalogo/editar";
 
 if (empty(validarPermisos($nombre))){
-    header("location:" . $url_base . $redireccion);        
+    echo "puedes pasar";      
 }else{
-    echo "puedes pasar";
+    header("location:" . $url_base . $redireccion);  
 }
 ?>
 
@@ -147,11 +147,6 @@ if (empty(validarPermisos($nombre))){
 
 <script type="text/javascript">
            
-    //Para los filtros
-    function borrarFiltros() {
-
-    }
-
     function buscarRestaurantes() {
 
     	let checkboxTipo = document.getElementsByName("tipoRest[]");

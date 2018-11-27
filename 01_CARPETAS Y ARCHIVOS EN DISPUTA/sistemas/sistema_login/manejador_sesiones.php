@@ -1,6 +1,7 @@
 <?php
 //session_start();
 function get_menu(){
+
     $menu = array();
     if(isset($_SESSION['tipo_usuario'])){
         if($_SESSION['tipo_usuario'] == "usuario"){

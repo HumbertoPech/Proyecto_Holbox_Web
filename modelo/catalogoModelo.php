@@ -39,7 +39,7 @@ function generarTitulo() {
 
 function cargarPrincipal(){  
     $HTMLrespuesta= array();
-    $resultados= consultar('SELECT * FROM restaurantes');
+    $resultados= consultarRestaurantes('SELECT * FROM restaurantes where disponibilidad=1');
     for($i=0; $i< count($resultados); $i++){
             array_push($HTMLrespuesta,presentarResultados($resultados[$i]));
        }
@@ -57,7 +57,7 @@ function realizarBusqueda(){
        if(isset($_POST["tipoRest"])) {
             $tiposSolicitados= array(); 
             for($i=0 ; $i<count($_POST["tipoRest"]);$i++){
-                $tipo= "tipo = '" . $_POST["tipoRest"][$i] . " ' ";
+                $tipo= "tipo_restaurante = '" . $_POST["tipoRest"][$i] . " ' ";
                 array_push($tiposSolicitados, $tipo);
             }
            
@@ -76,8 +76,8 @@ function realizarBusqueda(){
        }
 
         $cadenaConsulta= $cadenaInicial ." ". implode(" AND ", $parametrosBusqueda);
-
-       $resultados= consultar($cadenaConsulta);
+        $cadenaConsulta= $cadenaConsulta. " AND disponibilidad=1";
+       $resultados= consultarRestaurantes($cadenaConsulta);
 
        if(!empty($resultados)){
           $HTMLrespuesta= array();
@@ -128,20 +128,61 @@ function presentarResultados($rest){
 XYZ;
 return $columnas;
 }
-//Regresa HTML del menu
-function obtenerMenuEdicion(){
-
-    $HTMLrespuesta= array();
-
+function hey(){
+  return "hey";
+}
+function obtenerListado(){
   
-    if($_SESSION['tipo_usuario'] == "Proveedor"){
-      array_push($HTMLrespuesta, "</ul>");
-          $HTMLrespuesta= "";  
-    }else{
-      $permisosEspeciales=$_SESSION['permisos_especiales'];
-    }
-    array_push($HTMLrespuesta, "</ul>");
-    return implode(" ", $HTMLrespuesta);
+   $id= $_SESSION["id_usuario"];
+  $query = "sELECT * FROM restaurantes WHERE id_usuario="."'" .$id."'". "AND disponibilidad=1";
+    $resultados= consultarRestaurantes($query); 
+
+   foreach ($resultados as $restaurante) {
+    echo '<option value="'.$restaurante['id_restaurante'].'">'.$restaurante['nombre_restaurante'].'</option>';
+  }         
+}
+
+function insertarRestaurante(){
+  include_once('core/Conexion.php'); 
+  $conector = new Conexion();
+  $con= $conector ->get_conexion();
+ // escape variables for security
+$id = mysqli_real_escape_string($con, $_POST['id_usuario']);
+$nombre = mysqli_real_escape_string($con, $_POST['nombre_restaurante']);
+$telefono = mysqli_real_escape_string($con, $_POST['telefono_restaurante']);
+//SON TIME
+$horario_abierto = mysqli_real_escape_string($con, $_POST['horario_abierto']);
+$horario_cerrado = mysqli_real_escape_string($con, $_POST['horario_cerrado']);
+
+$precio = mysqli_real_escape_string($con, $_POST['precio']);
+$descripcion = mysqli_real_escape_string($con, $_POST['descripcion_restaurante']);
+$tipo = mysqli_real_escape_string($con, $_POST['tipo_restaurante']);
+
+$imagen = $_FILES['imagen_restaurante']['tmp_name'] ;
+
+// leer del archvio temporal .. el binario subido.
+$binario_contenido = addslashes(file_get_contents($imagen));
+
+//mysqli_real_escape_string($con, $_POST['telefono_restaurante']);
+
+$query= "INSERT INTO restaurantes 
+        (id_usuario,nombre_restaurante, telefono_restaurante,horario_abierto,horario_cerrado,precio,
+        descripcion_restaurante,tipo_restaurante,imagen_restaurante) VALUES
+        ($id, '$nombre', '$telefono','$horario_abierto','$horario_cerrado','$precio','$descripcion',
+        '$tipo','$binario_contenido')";
+
+$resultado= añadir($query);
+var_dump($resultado);
+
+return true;
+}
+
+function eliminarRestaurante(){
+  require_once('libs/conexionCatalogo.php');  
+  $id= $_POST['id_restaurante'];
+  $query = "UPDATE restaurantes SET disponibilidad=false WHERE id_restaurante=$id";
+  $resultado=eliminar($query); 
+  return $resultado; 
 }
 
 ?>
