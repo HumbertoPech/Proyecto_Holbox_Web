@@ -26,11 +26,11 @@ function añadir($query){
                         $resultado = $conexion->query($query);
                         if ($resultado === TRUE) {
                             $conexion->close();
-                             return "Restaurante agregado";
+                             return $resultado;
                         }
                     }
                     $conexion->close();
-    return $resultado->error();
+    return "Error en restaurante";
 
 }
 

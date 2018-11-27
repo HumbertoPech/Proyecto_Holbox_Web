@@ -84,7 +84,7 @@ function accion_agregarRestaurante(){
 	$resultado= insertarRestaurante();
 	echo "<script>alert($resultado);</script>";
 	$redireccion= $url_base."catalogo/editar";
-	echo "<script>setTimeout(\"location.href = '$redireccion';\",1500);</script>";
+	echo "<script>setTimeout(\"location.href = '$redireccion';\",500);</script>";
 }
 
 function accion_eliminarRestaurante(){

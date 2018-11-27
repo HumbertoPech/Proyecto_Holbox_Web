@@ -8,7 +8,7 @@ function get_menu(){
     #experienciasm catalogo y feed será visible para todos
     $menu['Feed'] = $url_base . "feed/iniciar";
     $menu['Experiencias'] = $url_base . "experiencias/iniciar";
-    $menu['Catalogo'] = $url_base . "catalogo/iniciar";
+    $menu['Catalogo'] = $url_base . "catalogo/iniciarCatalogo";
     if(!empty($_SESSION)){
         #Hacer $modulos global
         $modulos = array(
