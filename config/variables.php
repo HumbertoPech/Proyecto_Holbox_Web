@@ -1,12 +1,4 @@
 <?php
-/**
-* Declaracion de variables para la ubicacion del sistema y elementos iniciales
-*
-* @package configuracion
-* @author Victor Hugo Menendez Dominguez <mdoming@uady.mx>
-* @version 1.5
-* @date 11/Abril/2009
-**/
 
 /**
 * Nombre de la aplicacion
@@ -30,7 +22,7 @@ $directorio_base = 'c:/xampp/htdocs/aplicacion/';
 * URL de la aplicacion
 * @global string $url_base
 */
-$url_base = 'http://localhost/aplicacion/';
+$url_base = 'http://localhost/Proyecto_Holbox_Web/';
 
 /**
 * Controlador por defecto

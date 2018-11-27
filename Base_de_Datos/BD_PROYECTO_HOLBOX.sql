@@ -196,11 +196,13 @@ INSERT INTO ROLES(nombre_rol) VALUES
 ('Usuario'),
 ('Proveedor');
 
-#Añadiendo Administrador
+#Añadiendo Administrador y Proovedor
 INSERT INTO USUARIOS(nombre_usuario, correo, contrasena) VALUES
-('Administrador', 'admin', 'admin');
+('Administrador', 'admin', '$2y$10$hSrX3DQk6TOgkareETL1YOoPfsA4vPtDjL7Zrdn6VNTA1hthXWBri'),
+('Proveedor', 'proveedor','$2y$10$WegYZJPiaOdPZH4YOMH0SOKI.mP6adRU3ny.fj5n5BNkijp5MYtHq');
 INSERT INTO USUARIOS_ROLES(id_usuario, id_rol) VALUES
-(1,1);
+(1,1),
+(1,3);
 
 #Creando sistema
 INSERT INTO SISTEMAS(nombre_sistema) VALUES ('SISTEMA GENERAL');

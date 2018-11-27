@@ -18,6 +18,11 @@ body {
     padding: 0;
 }
 
+.error{
+    background-color: red;
+    margin: 0;
+    font-size: 11px;
+}
 .swal2-shown aside {
     height: 100vh;
 }

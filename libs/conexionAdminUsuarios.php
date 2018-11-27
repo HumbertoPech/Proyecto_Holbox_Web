@@ -23,7 +23,9 @@ function eliminar(){
     require_once('core/Conexion.php');  
     $con2 = new Conexion();
     $conexion2 = $con2->get_conexion();
-    $id = mysqli_real_escape_string($conexion2,(strip_tags($_GET["nik"],ENT_QUOTES)));
+
+    $id = mysqli_real_escape_string($conexion2,(strip_tags($_SESSION["nik"],ENT_QUOTES)));
+
     $cek = mysqli_query($conexion2, "SELECT * FROM usuarios WHERE id_usuario=$id");
     if(mysqli_num_rows($cek) == 0){
         echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> No se encontraron datos.</div>';
@@ -33,10 +35,12 @@ function eliminar(){
         $delete = mysqli_query($conexion2, $query);
         $con2->close_conexion();
         if($delete){
-            echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Datos eliminados correctamente.</div>';
+
+            echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Datos eliminados correctamente. Recargar PAgina</div>';
             return true;
         }else{
-            echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Error, no se pudieron eliminar los datos.</div>';
+            echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Error, no se pudieron eliminar los datos. Recargar Página</div>';
+
             return false;
         }
     }

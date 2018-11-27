@@ -18,13 +18,13 @@ function get_menu(){
             //"catalogo de restaurantes" => "catalogo/iniciar",
             //"experiencias" => "experiencias/iniciar",
             "recuperacion de cuenta" => "recuperacionCuenta/iniciar",
-            "administracion de usuarios" => "administracionUsuarios/iniciar",
+            "administracion de usuarios" => "adminUsuarios/iniciar",
             "bitacora" => "bitacora/iniciar"
         );
         $nombre_modulos = array(
             "calendario de eventos" =>  "Gestionar Eventos",
             "mis publicaciones" => "Mis publicaciones",
-            "perfil de usuario" => "Perdil",
+            "perfil de usuario" => "Perfil",
             //"catalogo de restaurantes" => "Catalogo de restaurantes",
             //"experiencias" => "Experiencias",
             "recuperacion de cuenta" => "Recuperacion cuenta",

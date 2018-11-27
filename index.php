@@ -1,16 +1,4 @@
 <?php
-/**
-* Controlador principal
-*
-* Contiene el controlador principal MVC,
-* Carga el controlador, el modelo y la vista necesaria
-*
-* @package inicio
-* @author Victor Hugo Menendez Dominguez <mdoming@uady.mx>
-* @version 1.5
-* @date 20/Abril/2009
-*
-**/
 
 // Deshabilitar todo reporte de errores
 error_reporting (E_ERROR | E_PARSE);
