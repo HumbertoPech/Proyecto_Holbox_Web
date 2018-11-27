@@ -14,62 +14,60 @@ if (empty($a)){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-Mx">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<?=$url_base?>resources/css/estilosGenerales.css">
+    <script src="<?=$url_base?>resources/js/jquery.min.js"></script>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montaga'>
     <title> <?php  echo $aplicacion;?> </title>
-    <link rel="stylesheet" href="<?php echo $url_base;?>resources/css/estilos_catalogo.css" type="text/css">
+    
     <link rel="stylesheet" href="<?php echo $url_base;?>resources/css/estilosGenerales.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montaga" rel="stylesheet">
-
 </head>
 
 <body>
-<header class="header-general">
+ <header class="header-general">
             <div style="padding: 8px 16px; overflow: hidden;">
                 <div class="tamano-5" id="logo"><span>HOLBOX</span></div>
                 <div class="tamano-5" id="logo-derecho"><span>VIVE UNA EXPERIENCIA SIN IGUAL</span></div>
             </div>
             <div class="menu-general">
+
                 <nav>
                     <ul class ="nav">
-                        <li><a href="../inicio.php">Inicio</a></li>
+                        <li><a href="<?= $url_base ?>paginas/Inicio">Inicio</a></li>
                         <li><a href="">Secciones</a>
                             <ul>
-                                <li><a href="Historia.php">Historia</a></li>
-                                <li><a href="LugaresHolbox.php">¿Qué hacer?</a></li>
-                                <li><a href="Gastronomia.php">Gastronomía</a></li>
-                                <li><a href="FloraFauna.php">Flora y Fauna</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                                <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                                <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
                             </ul>
                         </li>
-                        <li><a href="experienciasH.php">Experiencias</a></li>
-                        <li><a href="<?php echo $url_base;?>catalogo/editar"> Catálogo</a></li>
-                         <?php
-                        $toinclude ="01_CARPETAS Y ARCHIVOS EN DISPUTA/sistemas/sistema_login/manejador_sesiones.php";
-                        include($toinclude);                        
-                        $menu = get_menu();
+                        <?php
+                        include("libs/manejador_sesiones.php");
+                        $menu = get_Menu();
 
                         foreach( $menu as $opcion => $link){
-                            $link = "../".$link;
-                            echo "<li><a href=\"$link\"> $opcion</a></li>" ;
+                            echo "<li><a href=\"$link\">$opcion</a></li>";
                         }
-                        ?> 
+                        ?>
                     </ul>
                 </nav>
             </div>
             <div id="sesiones">
                 <?php
                 if(empty($_SESSION)){
-                    echo "<label><a href='../sistemas/sistema_login/login.php'>Iniciar Sesión  </a></label>";
-                    echo "<label><a href='../sistemas/sistema_signup/signup.php'> Registrarse</a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
+                    echo "<label><a href='{$url_base}registroUsuario/registrarUsuario'> Registrarse</a></label>";
                 }else{
+                    echo "<script src = '{$url_base}resources/js/autologout.js'></script>";
                     echo "<label>Bienvenido ".$_SESSION['nombre'] ." </label>";
-                    echo "<label><a href='../sistemas/sistema_login/logout.php'>Cerrar Sesión </a></label>";
+                    echo "<label><a href='{$url_base}inicioSesion/logout'>Cerrar Sesión </a></label>";
                 }
                 ?>
             </div>
-            </header>
+        </header>
 
 
 <!--.contenido-->
@@ -201,45 +199,44 @@ if (empty($a)){
                 </div>
               </form>      
     </div>
-
-    <div id="editar" class="tabcontent">
-        <h3>Edita un restaurante</h3>
-    </div>
-
-
     </article>
-   
-
 </div>
 
-<footer>
-    <div id="about">
-        <div class="tamano-7" id="menu-footer">
-            <nav>
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Historia</a></li>
-                    <li><a href="#">¿Qué hacer?</a></li>
-                    <li><a href="#">Gastronomía</a></li>
-                    <li><a href="#">Flora y Fauna</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="tamano-5" id="nosotros">
-            <h3>Sobre Nosotros</h3>
-            <ul>
-                <li>Chuc Arcia Alejandro</li>
-                <li>Ancona Graniel Ulises</li>
-                <li>Interian Bojorquez Shaid</li>
-                <li>Pech Huchin Humberto</li>
-                <li>Sosa Lopez Wendy</li>
-            </ul>
-        </div>
-    </div>
-    <p id="copyright">
-        Todos los derechos reservados &copy;. Holbox 2018
-    </p>
-</footer>
+ <footer>
+            <div id="about">
+                <div class="tamano-7" id="menu-footer">
+                    <nav>
+                        <ul>
+                            <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                            <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                            <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                            <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
+                            <?php
+                                $menu = get_Menu();
+
+                                foreach( $menu as $opcion => $link){
+                                    echo "<li><a href=\"$link\">$opcion</a></li>";
+                                }
+                            ?>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="tamano-5" id="nosotros">
+                    <h3>Sobre Nosotros</h3>
+                    <ul>
+                        <li>Chuc Arcia Alejandro</li>
+                        <li>Ancona Graniel Ulises</li>
+                        <li>Interian Bojorquez Shaid</li>
+                        <li>Pech Huchin Humberto</li>
+                        <li>Sosa Lopez Wendy</li>
+                    </ul>
+                </div>
+            </div>
+            <p id="copyright">
+                Todos los derechos reservados &copy;. Holbox 2018
+            </p>
+        </footer>
 
 <script type="text/javascript">
      // Get the element with id="defaultOpen" and click on it
