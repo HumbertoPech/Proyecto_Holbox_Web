@@ -24,7 +24,7 @@ function get_menu(){
         $nombre_modulos = array(
             "calendario de eventos" =>  "Gestionar Eventos",
             "mis publicaciones" => "Mis publicaciones",
-            "perfil de usuario" => "Perdil",
+            "perfil de usuario" => "Perfill",
             //"catalogo de restaurantes" => "Catalogo de restaurantes",
             //"experiencias" => "Experiencias",
             "recuperacion de cuenta" => "Recuperacion cuenta",
