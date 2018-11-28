@@ -13,6 +13,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" href="<?=$url_base?>resources/css/estilos.css">
+    <script src = '<?=$url_base?>resources/js/local_storage.js'></script>
 </head>
 <body>
     <!--FORMULARIO-->

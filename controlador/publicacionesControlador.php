@@ -10,4 +10,6 @@ function accion_iniciar() {
     include("modelo/proceso_guardar_imagenModelo.php");
     include('vista/perfil_usuarioVista.php');
 }
+
+function accion_logout(){global $url_base; session_start(); session_destroy();header("Location:{$url_base}paginas/Inicio");}
 ?>
