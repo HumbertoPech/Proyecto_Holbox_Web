@@ -14,4 +14,5 @@ function accion_enviarCorreo() {
     echo $enviado;
 }
 
+
 ?>

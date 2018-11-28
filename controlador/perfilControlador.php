@@ -42,4 +42,6 @@
         eliminarCuenta($id);
         include('vista/informacion_perfilVista.php');
     }
+
+    function accion_logout(){global $url_base; session_start(); session_destroy();header("Location:{$url_base}paginas/Inicio");}
 ?>

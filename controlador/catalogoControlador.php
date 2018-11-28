@@ -96,6 +96,6 @@ function accion_eliminarRestaurante(){
 }
 
 
-
+function accion_logout(){global $url_base; session_start(); session_destroy();header("Location:{$url_base}paginas/Inicio");}
 
 ?>

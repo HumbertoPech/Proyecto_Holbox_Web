@@ -14,4 +14,6 @@ function accion_iniciar() {
 	// Pasa a la vista toda la informacion que se desea representar
 	include('vista/bitacoraVista.php');
 }
+
+function accion_logout(){global $url_base; session_start(); session_destroy();header("Location:{$url_base}paginas/Inicio");}
 ?>
