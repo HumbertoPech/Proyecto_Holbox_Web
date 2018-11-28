@@ -38,7 +38,7 @@ article p{
 }
 
 .boton{
-    background-color: #000000;
+    background-color: rgba(0,0,0,0.7);
     padding: 10px 30px;
     display: inline-block;
     margin-top: 10px;
@@ -46,6 +46,11 @@ article p{
     color: #ffffff;
     text-transform: uppercase;
     text-decoration: none;
+    transition: ease 0.5s;
+}
+
+.boton:hover {
+    background-color: rgba(0,0,0,1);
 }
 /*Estilos sidebar*/
 

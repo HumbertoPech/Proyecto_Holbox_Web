@@ -7,6 +7,24 @@
     }
 }
 
+#catalogo {
+    min-height: 373px;
+}
+
+input#buscar {
+    background-color: rgba(17,17,17,0.7);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+    width:100%;
+}
+
+input#buscar:hover {
+    background-color: rgba(17,17,17,1);
+}
+
 img{
     width: 100%;
 }
@@ -29,9 +47,9 @@ li{
     text-decoration: none;
     text-align: center;
 }
-
 .restaurante-filtro{
     border-bottom: solid 1px black;
+    margin-bottom: 10px;
 }
 
 .flex-container{
@@ -47,15 +65,13 @@ li{
 .nav-bar {
     float: left;
     width: 20%;
-    background-color: #ccc;
+    background: #ccc;
     padding: 20px;
 }
-
 article {
-    float: right;
-    margin-left: -210px;
+    float: left;
     width: 80%;
-    background-color: #ccc;
+    background-color: #f1f1f1;
 }
 
 section:after {
@@ -64,10 +80,7 @@ section:after {
     clear: both;
 }
 
-/*imagenes del catalogo*/
-#contenido{
-    background-color: #ccc;
-}
+/*imagenes de flora*/
 .flex-catalogo > div {
     background-color:white;
     width: 300px;
@@ -78,8 +91,6 @@ section:after {
     float: left;
     display: none;
 }
-
-
 .contenedor-restaurante img{
     height: 60%;
 }

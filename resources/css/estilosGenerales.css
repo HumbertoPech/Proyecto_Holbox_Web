@@ -14,6 +14,12 @@
     width: 100%;
 }
 
+#sesiones a{
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+
 body {
     line-height: 1.5;
     background-color: #839A91;
@@ -89,6 +95,7 @@ h1, h2, h3, h4 {
 
 .nav > li {
     float:left;
+    padding: 5px 10px;
 }
 
 .nav li a {
@@ -101,16 +108,28 @@ h1, h2, h3, h4 {
 
 .nav li a:hover {
     background-color: #111111;
+    transition: ease 0.5s;
 }
 
 .nav li ul {
     display: none;
     position: relative;
     min-width: 140px;
+    transition: ease 0.5s;
 }
 
 .nav li:hover > ul{
     display: block;
+    position: absolute;
+    z-index: 2;
+    background: rgba(0,0,0,0.7);
+    padding: 10px;
+    border-radius: 0% 10%;
+    transition: ease 0.5s;
+}
+
+input[type=button]{
+    padding: 7px 10px;
 }
 /*media querys*/
 [class*="tamano-"] {
@@ -191,14 +210,16 @@ h1, h2, h3, h4 {
 
 #menu-footer li{
     float: left;
+    margin-right: 10px;
 }
 
 #menu-footer li a {
     display: block;
     color: whitesmoke;
     text-align: center;
-    padding: 3px;
+    padding: 5px;
     text-decoration: none;
+    transition: ease 0.8s;
 }
 
 #menu-footer li a:hover {
