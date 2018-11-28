@@ -11,6 +11,12 @@ html {
     box-sizing: inherit;
 }
 
+.error{
+    background-color: red;
+    margin: 0;
+    font-size: 11px;
+}
+
 body {
     font-family: 'Lato', sans-serif;
     min-height: 100%;
@@ -18,11 +24,6 @@ body {
     padding: 0;
 }
 
-.error{
-    background-color: red;
-    margin: 0;
-    font-size: 11px;
-}
 .swal2-shown aside {
     height: 100vh;
 }
@@ -39,7 +40,7 @@ body {
 }
 
 .contenedor-formulario {
-    background: rgba(51,51,51,.80);
+    background: linear-gradient(#aaa, gray);
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -57,7 +58,7 @@ body {
 }
 
 .caja-login {
-    background-color: #F2F2F2;
+    background-color: rgba(242, 242, 242, 0.8);
     border: 1px solid #707070;
     max-width: 650px;
     width: 90%;
@@ -97,7 +98,8 @@ body {
 }
 
 .boton {
-    background-color: rgba(51,51,51,.95);
+    background-color: rgba(17,17,17,0.7);
+    color: white;
     text-align: center;
     transition: background-color .5s ease-in-out;
     display: block;
@@ -111,7 +113,7 @@ body {
 
 .boton:hover {
     cursor: pointer;
-    background-color: rgba(193, 66, 66,.95)!important;
+    background-color: rgba(17,17,17,1)!important;
 }
 
 .campo a {
