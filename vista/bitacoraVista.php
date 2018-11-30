@@ -8,7 +8,6 @@ if (empty($a)){
     header("location:" . $url_base . $redireccion);
 }
 ?>
-<html>
 <!DOCTYPE html>
 <html lang="es-Mx">
     <head>
@@ -19,36 +18,32 @@ if (empty($a)){
         <title>BITACORA</title>
         <link rel="stylesheet" href="<?=$url_base;?>resources/bootstrap-3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?=$url_base;?>resources/bootstrap-3.3.7/css/csscustom.css">  
-        <link href="<?=$url_base;?>resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="<?=$url_base;?>resources/plugins/datepicker/datepicker3.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">                
-    </head>
-    <head> 
-        <style>
-        body
-        {
-            margin:0;
-            padding:0;
-            background-color:#f1f1f1;
-        }
-        .box
-        {
-            width:1270px;
-            padding:20px;
-            background-color:#fff;
-            border:1px solid #ccc;
-            border-radius:5px;
-            margin-top:25px;
-        }
-        </style>
-
-
-
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">   
+                     
     </head>
     <body>
-    <div class="header-general">
-    <div style="padding: 8px 16px; overflow: hidden;">
+
+        <style>
+            body
+            {
+                margin:0;
+                padding:0;
+                background-color:#f1f1f1;
+            }
+            .box
+            {
+                width:100%;
+                padding:20px;
+                background-color:#fff;
+                border:1px solid #ccc;
+                border-radius:5px;
+                margin-top:25px;
+            }
+            </style>
+        <div class="header-general">
+        <div style="padding: 8px 16px; overflow: hidden;">
+        
                 <div class="tamano-5" id="logo"><span>HOLBOX</span></div>
                 <div class="tamano-5" id="logo-derecho"><span>VIVE UNA EXPERIENCIA SIN IGUAL</span></div>
             </div>
@@ -74,8 +69,8 @@ if (empty($a)){
                         ?>
                     </ul>
                 </nav>
-        </div>
-        <div id="sesiones">
+            </div>
+            <div id="sesiones">
                 <?php
                 if(empty($_SESSION)){
                     echo "<label><a href='{$url_base}inicioSesion/iniciarSesion'>Iniciar Sesión  </a></label>";
@@ -87,148 +82,100 @@ if (empty($a)){
                 }
                 ?>
             </div>
-        </div>
-    </div>
-    <div>      
+        <div>      <!--fin header-->
+
         <div class="container box">
-           <h1 align="center">BITÁCORA</h1>
-           <br />
-           <div class="table-responsive"  style="overflow-x: hidden;">
-               <br />
-               <!--<form method="post" action="<?php //echo $url_base; ?>bitacora/filtrar">-->
-               <div class="row">
-                   <div class="input-daterange">
-                       
-                       <div class="col-md-3">
-                           Fecha de inicio:
-                           <input type="text" name="start_date" id="start_date" class="form-control" />
-                       </div>
-                       <div class="col-md-3">
-                           Fecha de cierre:
-                           <input type="text" name="end_date" id="end_date" class="form-control" />
-                       </div>      
-                   </div>
-                                      
-                   <div class="col-md-3">
-                       <label>Filtrar por usuario:</label>
-                        <select id="select_users" name="selCombo">
-                            <option value="none"></option>
+        <div class="content">
+            <h1 align="center">BITÁCORA</h1>
+                <div class="table-responsive" >
+                        <table id="tabla_bitacora" class="table  table-striped  table-hover">
+                            <tr>
+                                <th>Nombre de Usuario</th>
+                                <th>Fecha de registro</th>
+                                <th>Hora de registro</th>
+                                <th>Actividad</th>
+                                <th>Nombre de Permiso</th>
+                                <th>Nombre de Sistema</th>
+                            </tr>
                             <?php
-                                foreach ($data_usuarios as &$valor) {
-                            ?>
-                            <option value="option"><?php echo $valor?></option>
-                            <?php
+                            $resultadosBitacora= array();
+                            $resultadosBitacora = solicitarListaBitacora();
+                            if( count($resultadosBitacora)<=0){
+                                echo '<tr><td colspan="8">No hay datos.</td></tr>';
+                            }else{
+                                for($i=0; $i< count($resultadosBitacora); $i++){
+                                    $no = 1;							
+                                    echo '
+                                    <tr>
+                                        <td> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>'.$resultadosBitacora[$i]['nombre_usuario'].'</td>
+                                        <td>'.$resultadosBitacora[$i]['fecha_registro'].'</td>
+                                        <td>'.$resultadosBitacora[$i]['hora_registro'].'</td>
+                                        <td>'.$resultadosBitacora[$i]['actividad'].'</td>
+                                        <td>'.$resultadosBitacora[$i]['nombre_permiso'].'</td>                                         <td>'.$resultadosBitacora[$i]['nombre_sistema'].'</td></tr>';
+                                    $no++;							
                                 }
-                            ?>
-                        </select>
-                   </div>
-                   
-                   <div class="col-md-2">
-                       <label>Filtrar por Permiso:</label>
-                        <select id="select_permisos" name="selCombo">
-                            <option value="none"></option>
-                            <?php
-                                foreach ($data_permisos as &$valor2) {
-                            ?>
-                            <option value="option"><?php echo $valor2?></option>
-                            <?php
                             }
                             ?>
-                            </select>                                             
-                   </div>    
-                   <br><br><br><br>
-                   <div class="col-md-3">
-                       <label>Filtrar por Sistemas:</label>
-                        <select id="select_sistemas" name="selCombo">
-                            <option value="none"></option>
-                            <?php
-                                foreach ($data_sistemas as &$valor) {
-                            ?>
-                            <option value="option"><?php echo $valor?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>                                             
-                   </div>
-                    <div class="col-md-3">
-                        <input type="submit" name="search" id="search" value="Buscar por filtrado" class="btn btn-info active" />
-                    </div>
-                    <div class="col-md-3">
-                        <input type="submit" name="mostrar_todos" id="mostrar_todos" value="Mostrar Todos" class="btn btn-info active" />
-                    </div>
-            <!--<form> -->                       
-               </div>
-               <br/>
-               <table id="order_data" class="table  table-striped  table-hover">
-                   <thead>
-                       <tr>
-                           <th>Nombre de Usuario</th>
-                           <th>Fecha de registro</th>
-                           <th>Hora de registro</th>
-                           <th>Actividad</th>
-                           <th>Nombre de Permiso</th>
-                           <th>Nombre de Sistema</th>
-                       </tr>
-                   </thead>
-               </table>
-           </div>
-       </div>
-    </div>
-    <div>
-    <style>
-        .myfooter{
-            background-color: rgba(51,51,51,.95);
-            margin-top: 10px;
-            box-shadow: 0 2px 5px 0;
-        }
-
-        body {
-            line-height: 1.5 !important;
-            background-color: #839A91 !important;
-        }
-
-    </style>
-
-    <div class="myfooter">   
-    <div id="about">
-                <div class="tamano-7" id="menu-footer">
-                    <nav>
-                        <ul>
-                            <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
-                            <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
-                            <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
-                            <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
-                            <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
-                            <?php
-                                $menu = get_Menu();
-
-                                foreach( $menu as $opcion => $link){
-                                    echo "<li><a href=\"$link\">$opcion</a></li>";
-                                }
-                            ?>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="tamano-5" id="nosotros">
-                    <h3>Sobre Nosotros</h3>
-                    <ul>
-                        <li>Chuc Arcia Alejandro</li>
-                        <li>Ancona Graniel Ulises</li>
-                        <li>Interian Bojorquez Shaid</li>
-                        <li>Pech Huchin Humberto</li>
-                        <li>Sosa Lopez Wendy</li>
-                    </ul>
-                </div>
+                        </table>
+                    
+                    
+ 
+                <br/>
             </div>
-            <p id="copyright">
-                Todos los derechos reservados &copy;. Holbox 2018
-            </p>
-    </div>
-        <script src="<?=$url_base;?>resources/bootstrap-3.3.7/js/jQuery-2.1.4.min.js"></script>
-        <script src="<?=$url_base;?>resources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-        <script src="<?=$url_base;?>resources/plugins/datepicker/bootstrap-datepicker.js"></script>
-        <script src="<?=$url_base;?>resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-        <script src="<?=$url_base;?>resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>             
+            </div>
+        </div>
+        </div>
+        <style>
+            .myfooter{
+                background-color: rgba(51,51,51,.95);
+                margin-top: 10px;
+                box-shadow: 0 2px 5px 0;
+            }
+
+            body {
+                line-height: 1.5 !important;
+                background-color: #839A91 !important;
+            }
+
+        </style>
+
+        <div class="myfooter">   
+            <div id="about">
+                    <div class="tamano-7" id="menu-footer">
+                        <nav>
+                            <ul>
+                                <li><a href="<?=$url_base?>paginas/Inicio">Inicio</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Historia">Historia</a></li>
+                                <li><a href="<?= $url_base ?>paginas/LugaresHolbox">¿Qué hacer?</a></li>
+                                <li><a href="<?= $url_base ?>paginas/Gastronomia">Gastronomía</a></li>
+                                <li><a href="<?= $url_base ?>paginas/FloraFauna">Flora y Fauna</a></li>
+                                <?php
+                                    $menu = get_Menu();
+
+                                    foreach( $menu as $opcion => $link){
+                                        echo "<li><a href=\"$link\">$opcion</a></li>";
+                                    }
+                                ?>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="tamano-5" id="nosotros">
+                        <h3>Sobre Nosotros</h3>
+                        <ul>
+                            <li>Chuc Arcia Alejandro</li>
+                            <li>Ancona Graniel Ulises</li>
+                            <li>Interian Bojorquez Shaid</li>
+                            <li>Pech Huchin Humberto</li>
+                            <li>Sosa Lopez Wendy</li>
+                        </ul>
+                    </div>
+                </div>
+                <p id="copyright">
+                    Todos los derechos reservados &copy;. Holbox 2018
+                </p>
+            </div>
+        </div>
+
     </body>
 </html>
 
@@ -269,8 +216,8 @@ if (empty($a)){
             format: "yyyy-mm-dd",
             autoclose: true
         });
-        fetch_data('no');
-        function fetch_data(is_date_search, start_date='', end_date='',nombre_usuario='', nombre_permiso='', nombre_sistema='')
+        //fetch_data('no');
+        /*function fetch_data(is_date_search, start_date='', end_date='',nombre_usuario='', nombre_permiso='', nombre_sistema='')
         {   
                 var dataTable = $('#order_data').DataTable({
                 "language":{
@@ -301,8 +248,8 @@ if (empty($a)){
                     }
                 }
             });
-        }
-        $('#search').click(function(){
+        }*/
+        /*$('#search').click(function(){
             var start_date = $('#start_date').val();
             var end_date = $('#end_date').val();
             var selectUsers = document.getElementById("select_users");
@@ -326,7 +273,7 @@ if (empty($a)){
         $('#mostrar_todos').click(function(){
                 $('#order_data').DataTable().destroy();
                 fetch_data('no');
-        });
+        });*/
 
     });
 </script>
